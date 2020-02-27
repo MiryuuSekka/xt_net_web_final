@@ -1,0 +1,44 @@
+﻿@using Entity;
+@{
+    Layout = "~/Pages/Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Style/Style1.css" rel="stylesheet" />
+    <title></title>
+</head>
+<body>
+
+    <div  class="container">
+        <div>
+            <p>New Bet</p>
+        </div>
+
+        <div style="background-color:lightblue">
+            <p>info about product</p>
+        </div>
+
+        <form action="/" method="post">
+            <div>
+                <div class="form-inline">
+                    <p>last price: </p>
+                    <p> 5$</p>
+                </div>
+                <div class="form-inline">
+                    <p>u price: </p>
+                    <div class="input-group mb-3">
+
+                    </div>
+                </div>
+            </div>
+            <button class="btn btn-dark">Submit</button>
+        </form>
+    </div>
+
+</body>
+</html>
