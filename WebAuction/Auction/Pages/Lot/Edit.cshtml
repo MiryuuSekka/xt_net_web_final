@@ -1,0 +1,57 @@
+﻿@using Entity;
+@using Entity.Classes;
+@{
+    Layout = "~/Pages/_Layout.cshtml";
+
+
+    Lot Lot = null;
+    var LotId = Request["id"];
+    if (LotId != null)
+    {
+        int.TryParse(LotId, out int id);
+        var code = new Auction.Code.Logic();
+        Lot = code.Code.GetLotById(id);
+    }
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+</head>
+<body class="bg-dark">
+    @if (Lot != null)
+    {
+        <p class="text-white">Edit</p>
+        <div class="container">
+            <div>
+                <div>
+                    <p class="text-white">ITS INFO ABOUT PRODUCT</p>
+                </div>
+                <div class="border-bottom">
+                    <p class="text-dark">ITS INFO ABOUT LOT</p>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <section class="jumbotron text-center">
+            <div class="container">
+                <h1>Error</h1>
+                <p class="lead text-muted">
+                    Lot is didn`t found.
+                </p>
+                <p>
+                    <a href="~/Pages/Index.cshtml" class="btn btn-info">Back</a>
+                </p>
+            </div>
+        </section>
+    }
+
+    <script src="~/Scripts/jquery-3.0.0.js"></script>
+    <script src="~/Style/Script.js"></script>
+</body>
+</html>

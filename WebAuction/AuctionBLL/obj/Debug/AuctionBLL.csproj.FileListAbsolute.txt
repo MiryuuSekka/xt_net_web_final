@@ -1,0 +1,15 @@
+D:\EpamFinalTask\WebAuction\AuctionBLL\bin\Debug\AuctionBLL.dll
+D:\EpamFinalTask\WebAuction\AuctionBLL\bin\Debug\AuctionBLL.pdb
+D:\EpamFinalTask\WebAuction\AuctionBLL\bin\Debug\Entity.dll
+D:\EpamFinalTask\WebAuction\AuctionBLL\bin\Debug\InterfaceBLL.dll
+D:\EpamFinalTask\WebAuction\AuctionBLL\bin\Debug\InterfaceDAL.dll
+D:\EpamFinalTask\WebAuction\AuctionBLL\bin\Debug\log4net.dll
+D:\EpamFinalTask\WebAuction\AuctionBLL\bin\Debug\Entity.pdb
+D:\EpamFinalTask\WebAuction\AuctionBLL\bin\Debug\InterfaceBLL.pdb
+D:\EpamFinalTask\WebAuction\AuctionBLL\bin\Debug\InterfaceDAL.pdb
+D:\EpamFinalTask\WebAuction\AuctionBLL\bin\Debug\log4net.xml
+D:\EpamFinalTask\WebAuction\AuctionBLL\obj\Debug\AuctionBLL.csprojAssemblyReference.cache
+D:\EpamFinalTask\WebAuction\AuctionBLL\obj\Debug\AuctionBLL.csproj.CoreCompileInputs.cache
+D:\EpamFinalTask\WebAuction\AuctionBLL\obj\Debug\AuctionBLL.csproj.CopyComplete
+D:\EpamFinalTask\WebAuction\AuctionBLL\obj\Debug\AuctionBLL.dll
+D:\EpamFinalTask\WebAuction\AuctionBLL\obj\Debug\AuctionBLL.pdb

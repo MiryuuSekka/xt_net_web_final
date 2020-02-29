@@ -1,0 +1,116 @@
+﻿@using Entity;
+@using Entity.Classes;
+@{
+    Layout = "~/Pages/_Layout.cshtml";
+
+    var code = new Auction.Code.Logic();
+    User CurrentUser = code.Code.GetUserById(1);
+    Lot Lot = null;
+    var LotId = Request["id"];
+    if (LotId != null)
+    {
+        int.TryParse(LotId, out int id);
+        Lot = code.Code.GetLotById(id);
+    }
+    var Bets = new List<Bet>();
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <title></title>
+</head>
+<body class="bg-dark">
+    @if (Lot != null)
+    {
+        <section class="jumbotron text-center">
+            <div class="container">
+                <h1>@Lot.Product.Title by @Lot.Product.Company</h1>
+                <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active" style="max-height:300px; max-width:500px;">
+                            <img class="d-block w-100"
+                                 style="max-height:100%; width:auto; object-fit: contain;"
+                                 src="@Lot.Product.Photos[0].Path"
+                                 alt="@Lot.Product.Photos[0].Comment">
+                        </div>
+                        @if (Lot.Product.Photos.Count() > 1)
+                        {
+                            foreach (var item in Lot.Product.Photos)
+                            {
+                                if (item.Id != Lot.Product.Photos[0].Id)
+                                {
+                                    <div class="carousel-item">
+                                        <img class="d-block w-100"
+                                             style="max-height:100%; width:auto; object-fit: contain;"
+                                             src="@item.Path"
+                                             alt="@item.Comment">
+                                    </div>
+                                }
+                            }
+                        }
+                    </div>
+
+                    @if (Lot.Product.Photos.Count() > 1)
+                    {
+                        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                        <p class="text-dark">Status: @Lot.Product.Status.ToString()</p>
+                    }
+                    </div>
+
+                <div>
+                    <p class="text-dark">auction is open at: @Lot.DateStart.ToString("dd.MM.yyyy") - @Lot.DateEnd.ToString("dd.MM.yyyy")</p>
+                    <p class="text-dark">Last price: @Lot.Price $</p>
+                </div>
+                @if (!CurrentUser.Role.Equals(Entity.Common.Role.Admin) && !CurrentUser.Role.Equals(Entity.Common.Role.Guest))
+                {
+                    if (CurrentUser.Id != Lot.Seller.Id)
+                    {
+                        <div class="border-top border-dark container align-content-center" style="padding-top:10px">
+                            <div class="input-group" style="min-width:200px; max-width:300px;">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text badge-light">$</span>
+                                </div>
+                                <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
+                                <div class="input-group-append">
+                                    <span class="input-group-text badge-light">.00</span>
+                                </div>
+                                <div class="input-group-append">
+                                    <button class="btn btn-success" type="button">Add bet</button>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+        </section>
+    }
+    else
+    {
+        <section class="jumbotron text-center">
+            <div class="container">
+                <h1>Error</h1>
+                <p class="lead text-muted">
+                    Lot is didn`t found.
+                </p>
+                <p>
+                    <a href="~/Pages/Index.cshtml" class="btn btn-info">Back</a>
+                </p>
+            </div>
+        </section>
+    }
+
+    <script src="~/Scripts/jquery-3.0.0.js"></script>
+    <script src="~/Style/Script.js"></script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+D:\EpamFinalTask\WebAuction\Entity\bin\Debug\Entity.dll
+D:\EpamFinalTask\WebAuction\Entity\bin\Debug\Entity.pdb
+D:\EpamFinalTask\WebAuction\Entity\bin\Debug\log4net.dll
+D:\EpamFinalTask\WebAuction\Entity\bin\Debug\log4net.xml
+D:\EpamFinalTask\WebAuction\Entity\obj\Debug\Entity.csprojAssemblyReference.cache
+D:\EpamFinalTask\WebAuction\Entity\obj\Debug\Entity.csproj.CoreCompileInputs.cache
+D:\EpamFinalTask\WebAuction\Entity\obj\Debug\Entity.csproj.CopyComplete
+D:\EpamFinalTask\WebAuction\Entity\obj\Debug\Entity.dll
+D:\EpamFinalTask\WebAuction\Entity\obj\Debug\Entity.pdb
