@@ -1,8 +1,11 @@
 ﻿using Entity;
 using Entity.Classes;
+using SQLBase.DB;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Configuration;
+using System.Data.SqlClient;
 
 namespace SQLBase
 {
@@ -81,7 +84,9 @@ namespace SQLBase
 
         public int AddUser(User NewData)
         {
-            throw new NotImplementedException();
+            var DB = new SqlUser();
+            DB.AddData(NewData);
+            return DB.GetAll().LastOrDefault().Id;
         }
         #endregion
 
@@ -104,7 +109,8 @@ namespace SQLBase
 
         public void ChangeUser(User NewData)
         {
-            throw new NotImplementedException();
+            var DB = new SqlUser();
+            DB.Edit(NewData);
         }
         #endregion
 
@@ -174,22 +180,26 @@ namespace SQLBase
 
         public Product GetProductById(int Id)
         {
-            return Products.Where(x => x.Id == Id).FirstOrDefault();
+            var DB = new SqlProduct();
+            return DB.GetAll().Where(x => x.Id == Id).FirstOrDefault();
         }
 
         public IEnumerable<Product> GetProducts()
         {
-            return Products;
+            var DB = new SqlProduct();
+            return DB.GetAll();
         }
 
         public User GetUserById(int Id)
         {
-            return Users.Where(x => x.Id == Id).FirstOrDefault();
+            var DB = new SqlUser();
+            return DB.GetAll().Where(x => x.Id == Id).FirstOrDefault();
         }
 
         public IEnumerable<User> GetUsers()
         {
-            return Users;
+            var DB = new SqlUser();
+            return DB.GetAll();
         }
         #endregion
     }

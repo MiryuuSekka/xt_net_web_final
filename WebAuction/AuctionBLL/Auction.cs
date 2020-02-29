@@ -66,22 +66,38 @@ namespace AuctionBLL
             #region delete
             public void DeleteBet(int Id)
             {
-                Dal.DeleteBet(Id);
+                var bet = GetBetById(Id);
+                if (bet != null)
+                {
+                    Dal.DeleteBet(Id);
+                }
             }
 
             public void DeleteLot(int Id)
             {
-                Dal.DeleteLot(Id);
+                var lot = GetLotById(Id);
+                if (lot != null)
+                {
+                    Dal.DeleteLot(Id);
+                }
             }
 
             public void DeleteProduct(int Id)
             {
-                Dal.DeleteProduct(Id);
+                var product = GetProductById(Id);
+                if (product != null)
+                {
+                    Dal.DeleteProduct(Id);
+                }
             }
 
             public void DeleteUser(int Id)
             {
-                Dal.DeleteUser(Id);
+                var user = GetUserById(Id);
+                if (user != null)
+                {
+                    Dal.DeleteUser(Id);
+                }
             }
             #endregion
 
