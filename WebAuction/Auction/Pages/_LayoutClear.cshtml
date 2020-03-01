@@ -1,0 +1,27 @@
+﻿@using Auction.Code;
+@{
+    Layout = null;
+
+    var code = new Logic();
+    var Lots = code.Code.GetLots();
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <title></title>
+</head>
+<body>
+    <nav class="navbar navbar-dark bg-success">
+        <div class="form-inline my-2 my-lg-0">
+            <a class="btn btn-outline-white" href="~/Pages/Index.cshtml">< back</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        @RenderBody()
+    </div>
+</body>
+</html>

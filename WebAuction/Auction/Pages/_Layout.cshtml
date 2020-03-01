@@ -1,12 +1,10 @@
-﻿@using Entity;
-@using Entity.Classes;
+﻿@using Auction.Code;
 @{
     Layout = null;
-    var user = new User();
-    user.Role = Common.Role.Guest;
-    var Avatar = @"https://pbs.twimg.com/profile_images/1232223608572956673/0ctlS7nc_400x400.jpg";
-}
 
+    var code = new Logic();
+    var Lots = code.Code.GetLots();
+}
 <!DOCTYPE html>
 
 <html>
@@ -17,21 +15,35 @@
 </head>
 <body>
     <nav class="navbar navbar-dark bg-success">
+        <div>
+            @if (Logic.CurrentUser.Role.ToString().Equals("Admin"))
+            {
+                <a class="btn btn-warning" href="~/Pages/Lot/Add.cshtml">Users managment</a>
+            }
+            @if (Logic.CurrentUser.Role.ToString().Equals("Seller"))
+            {
+                <a class="btn btn-success" href="~/Pages/Lot/Add.cshtml">Add Lot</a>
+                <a class="btn btn-info" href="~/Pages/Lot/Add.cshtml">View Lot</a>
+            }
+        </div>
         <div class="form-inline my-2 my-lg-0">
             <input type="text" name="name" value="" />
             <button class="btn btn-dark">Search</button>
         </div>
 
         <div class="form-inline my-2 my-lg-0">
-            @if (user.Role.ToString().Equals("Guest"))
+            <div style="margin-right:25px">
+                <h5 class="text-dark">@Logic.CurrentUser.Role.ToString()</h5>
+                <h4 class="text-white">@Logic.CurrentUser.Name</h4>
+            </div>
+            @if (Logic.CurrentUser.Role.ToString().Equals("Guest"))
             {
-                <button class="btn btn-dark">Sign in</button>
-                <button class="btn btn-dark">Create account</button>
+                <a class="btn btn-info" href="~/Pages/Autorisation/LogIn.cshtml">Log in</a>
+                <a class="btn btn-danger" href="~/Pages/Autorisation/NewUser.cshtml">Create account</a>
             }
             else
             {
-                <img src="@Avatar" alt="Avatar" style="height:50px; width:50px; border-radius:100%" />
-                <button class="btn btn-dark">Sign out</button>
+                <a class="btn btn-outline-dark" href="~/Pages/Autorisation/Logout.cshtml">Sign out</a>
             }
         </div>
     </nav>

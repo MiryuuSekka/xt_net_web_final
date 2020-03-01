@@ -4,18 +4,18 @@
     {
         public enum Role
         {
-            Admin,
-            Seller,
-            Customer,
-            Guest
+            Admin = 1,
+            Seller = 2,
+            Customer = 3,
+            Guest = 4
         }
         public enum Status
         {
-            New,
-            NotOpened,
-            SmallDefects,
-            MediumDefects,
-            BigDefects
+            New = 1,
+            NotOpened = 2,
+            SmallDefects = 3,
+            MediumDefects = 4,
+            BigDefects = 5
         }
     }
 }

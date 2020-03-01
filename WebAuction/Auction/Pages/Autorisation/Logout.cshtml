@@ -1,0 +1,11 @@
+﻿
+@using Auction.Code;
+@{
+    Layout = "~/Pages/_LayoutClear.cshtml";
+
+    var code = new Auction.Code.Logic();
+    Logic.CurrentUser = code.Code.GetUserById(2);
+    FormsAuthentication.SignOut();
+
+    Response.Redirect("~/Pages/Index.cshtml");
+}

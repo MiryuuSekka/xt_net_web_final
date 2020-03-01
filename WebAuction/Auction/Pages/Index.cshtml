@@ -1,10 +1,9 @@
 ﻿@using Entity;
-@using Entity.Classes;
+@using Auction.Code;
 @{
     Layout = "~/Pages/_Layout.cshtml";
 
-    var code = new Auction.Code.Logic();
-    var name = code.Code.GetUserById(1);
+    var code = new Logic();
     var Lots = code.Code.GetLots();
 }
 
@@ -17,17 +16,17 @@
     <title></title>
 </head>
 <body class="bg-dark">
-    @if (name.Role.Equals(Common.Role.Guest))
+    @if (Logic.CurrentUser.Role.Equals(Common.Role.Guest))
     {
         <section class="jumbotron text-center">
             <div class="container">
-                <h1>Hello, @name.Name</h1>
+                <h1>Hello, @Logic.CurrentUser.Name</h1>
                 <p class="lead text-muted">
                     Join
                 </p>
                 <p>
-                    <a href="#" class="btn btn-info">log in</a>
-                    <a href="#" class="btn btn-danger">Create new account</a>
+                    <a href="~/Pages/Autorisation/LogIn.cshtml" class="btn btn-info">log in</a>
+                    <a href="~/Pages/Autorisation/NewUser.cshtml" class="btn btn-danger">Create new account</a>
                 </p>
             </div>
         </section>
@@ -59,14 +58,14 @@
                                                href="~/Pages/Lot/View.cshtml?id=@item.Id">
                                                 View
                                             </a>
-                                            @if (name.Role.Equals(Common.Role.Admin))
+                                            @if (Logic.CurrentUser.Role.Equals(Common.Role.Admin))
                                             {
                                                 <button class="btn btn-sm btn-outline-info">Edit</button>
                                             }
 
-                                            @if (name.Role.Equals(Common.Role.Seller))
+                                            @if (Logic.CurrentUser.Role.Equals(Common.Role.Seller))
                                             {
-                                                if (name.Id.Equals(item.Seller.Id))
+                                                if (Logic.CurrentUser.Id.Equals(item.Seller.Id))
                                                 {
                                                     <button class="btn btn-sm btn-outline-info">Edit</button>
                                                 }
@@ -76,7 +75,7 @@
                                                 }
                                             }
 
-                                            @if (name.Role.Equals(Common.Role.Customer))
+                                            @if (Logic.CurrentUser.Role.Equals(Common.Role.Customer))
                                             {
                                                 <button class="btn btn-sm btn-outline-success">Bet</button>
                                             }

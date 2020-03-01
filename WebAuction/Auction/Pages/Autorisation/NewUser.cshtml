@@ -1,0 +1,79 @@
+﻿@using Entity;
+@using Entity.Classes;
+@using Auction.Code;
+@{
+    Layout = "~/Pages/_LayoutClear.cshtml";
+
+    var code = new Logic();
+    var Lots = code.Code.GetLots();
+    var name = code.Code.GetUserById(1);
+
+
+    bool IsFinded = false;
+    string Username = Request["newName"];
+    string Password = Request["newPassword"];
+    string Error = "";
+
+    if (IsPost)
+    {
+        IsFinded = code.IsUserExist(Username);
+        if (!IsFinded)
+        {
+            var User = new User();
+            User.Name = Username;
+            User.Password = Password;
+            User.Role = Common.Role.Customer;
+
+            var id = code.Code.AddUser(User);
+            Logic.CurrentUser = code.Code.GetUserById(id);
+
+            FormsAuthentication.SetAuthCookie(Username, createPersistentCookie: true);
+            Response.Redirect("~/Pages/Index.cshtml");
+        }
+        else
+        {
+            Error = "Already Exist";
+        }
+    }
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <title></title>
+</head>
+<body class="bg-dark">
+
+    <div class="container">
+        <form method="post">
+            <div>
+                <div>
+                    <label class="col-form-label text-white">Username:</label>
+                    <input class="form-control" type="text" name="newName" style="max-width:300px; min-width:100px;" value="" />
+                </div>
+
+                <div>
+                    <label class="col-form-label text-white">Password:</label>
+                    <input class="form-control" type="password" name="newPassword" style="max-width:300px; min-width:100px;" value="" />
+                </div>
+
+                <div class="custom-control custom-switch" style="margin-top:15px">
+                    @if (IsFinded)
+                    {
+                        <p class="text-danger">ERROR: @Error</p>
+                    }
+                </div>
+                <div style="margin-top:15px">
+                    <button class="btn btn-success">Sign up > </button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+    <script src="~/Scripts/jquery-3.0.0.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+</body>
+</html>

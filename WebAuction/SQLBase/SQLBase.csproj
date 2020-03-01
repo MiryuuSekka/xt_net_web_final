@@ -42,10 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DB\SqlCommon.cs" />
-    <Compile Include="DB\SqlPhoto.cs" />
-    <Compile Include="DB\SqlProduct.cs" />
-    <Compile Include="DB\SqlUser.cs" />
+    <Compile Include="DB\SqlRead.cs" />
     <Compile Include="SqlDal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
