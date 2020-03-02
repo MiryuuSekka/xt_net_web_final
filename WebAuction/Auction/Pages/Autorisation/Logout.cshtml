@@ -1,7 +1,6 @@
-﻿
-@using Auction.Code;
+﻿@using Auction.Code;
 @{
-    Layout = "~/Pages/_LayoutClear.cshtml";
+    Layout = null;
 
     var code = new Auction.Code.Logic();
     Logic.CurrentUser = code.Code.GetUserById(2);

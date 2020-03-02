@@ -82,6 +82,11 @@ namespace SQLBase
         {
             DataBase.DeleteUser(Id);
         }
+
+        public IEnumerable<Bet> GetAllLotsBet(int LotId)
+        {
+            return DataBase.GetAllLotsBet(LotId);
+        }
         #endregion
 
         #region get
@@ -97,7 +102,7 @@ namespace SQLBase
 
         public Lot GetLotById(int Id)
         {
-            return null;
+            return DataBase.GetLotById(Id);
         }
 
         public IEnumerable<Lot> GetLotByTag(string Tag)
@@ -112,12 +117,17 @@ namespace SQLBase
 
         public Product GetProductById(int Id)
         {
-            return null;
+            return DataBase.GetProductById();
         }
 
         public IEnumerable<Product> GetProducts()
         {
-            return null;
+            return DataBase.GetAllProduct();
+        }
+
+        public IEnumerable<Tag> GetProductTags(int LogId)
+        {
+            return DataBase.GetProductTags(LogId);
         }
 
         public User GetUserById(int Id)

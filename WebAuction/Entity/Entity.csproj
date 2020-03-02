@@ -48,6 +48,7 @@
     <Compile Include="Classes\Lot.cs" />
     <Compile Include="Classes\Photo.cs" />
     <Compile Include="Classes\Product.cs" />
+    <Compile Include="Classes\Tag.cs" />
     <Compile Include="Classes\User.cs" />
     <Compile Include="Common.cs" />
     <Compile Include="Helper.cs" />

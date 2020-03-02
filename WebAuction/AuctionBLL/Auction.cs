@@ -147,6 +147,15 @@ namespace AuctionBLL
                 return Dal.GetUsers();
             }
             #endregion
+
+            public IEnumerable<Tag> GetProductTags(int LogId)
+            {
+                return Dal.GetProductTags(LogId);
+            }
+            public IEnumerable<Bet> GetAllLotsBet(int LotId)
+            {
+                return Dal.GetAllLotsBet(LotId);
+            }
         }
     }
 }

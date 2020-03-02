@@ -1,0 +1,98 @@
+﻿@using Entity.Classes;
+@using Auction.Code;
+@{
+    Layout = "~/Pages/_LayoutClear.cshtml";
+
+    var code = new Logic();
+    List<User> Users;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <title></title>
+</head>
+<body class="bg-dark">
+    @if (Logic.CurrentUser.Role.ToString().Equals("Admin"))
+    {
+        Users = code.Code.GetUsers().ToList();
+
+    <div>
+        <div>
+            <h2 class="text-warning">Users:</h2>
+        </div>
+        @foreach (var item in Users)
+        {
+        <div class="card bg-secondary btn-outline-warning my-1 form-inline flex-row" >
+            <h3 class="text-white" style="margin:5px 50px">@item.Name </h3>
+            <div class="btn-group btn-group-toggle flex-row-reverse" data-toggle="buttons">
+                @if (item.Role.ToString().Equals("Admin"))
+                {
+                    <label class="btn btn-secondary active">
+                        <input type="radio" name="options" id="option1" autocomplete="off" checked> Admin
+                    </label>
+                    <label class="btn btn-secondary">
+                        <input type="radio" name="options" id="option2" autocomplete="off"> Seller
+                    </label>
+                    <label class="btn btn-secondary">
+                        <input type="radio" name="options" id="option3" autocomplete="off"> Customer
+                    </label>
+                }
+                else
+                {
+                    if (item.Role.ToString().Equals("Seller"))
+                    {
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="options" id="option2" autocomplete="off"> Admin
+                        </label>
+                        <label class="btn btn-secondary active">
+                            <input type="radio" name="options" id="option1" autocomplete="off" checked> Seller
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="options" id="option3" autocomplete="off"> Customer
+                        </label>
+                    }
+                    else
+                    {
+                        if (item.Role.ToString().Equals("Customer"))
+                        {
+                            <label class="btn btn-secondary">
+                                <input type="radio" name="options" id="option2" autocomplete="off"> Admin
+                            </label>
+                            <label class="btn btn-secondary">
+                                <input type="radio" name="options" id="option3" autocomplete="off"> Seller
+                            </label>
+                            <label class="btn btn-secondary active">
+                                <input type="radio" name="options" id="option1" autocomplete="off" checked> Customer
+                            </label>
+                        }
+                    }
+
+                    <label class="btn btn-danger">
+                        <input type="radio" name="options" id="option4" autocomplete="off" checked> Delete
+                    </label>
+                }
+            </div>
+        </div>
+        }
+    </div>
+    }
+    else
+    {
+        <section class="jumbotron text-center">
+            <div class="container">
+                <h1>Error</h1>
+                <p class="lead text-muted">
+                    u cant
+                </p>
+                <p>
+                    <a href="~/Pages/Index.cshtml" class="btn btn-info">Back</a>
+                </p>
+            </div>
+        </section>
+    }
+</body>
+</html>

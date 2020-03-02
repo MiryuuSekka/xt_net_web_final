@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.Linq;
 
 namespace SQLBase.DB
 {
@@ -342,13 +343,139 @@ namespace SQLBase.DB
         }
 
 
+        public Lot GetLotById(int id)
+        {
+            var LotInfo = GetViewLotInfo(id);
+            LotInfo.Product.Photos = GetAllProductPhotoById(LotInfo.Product.Id).ToList();
 
+            return LotInfo;
+        }
+        public IEnumerable<Tag>GetProductTags(int LogId)
+        {
+            var Tags = new List<Tag>();
+            string sqlExpression = "GetTagByLotId";
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                connection.Open();
+                var command = new SqlCommand(sqlExpression, connection);
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.Add(new SqlParameter { ParameterName = "@id", Value = LogId });
+
+                var reader = command.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        Tags.Add(new Tag()
+                        {
+                            Id = (int)reader[0],
+                            Title = reader[1].ToString()
+                        });
+                    }
+                }
+                reader.Close();
+            }
+            return Tags;
+        }
+        public IEnumerable<Bet> GetAllLotsBet(int LotId)
+        {
+            var Bets = new List<Bet>();
+            string sqlExpression = "GetBetsAtLot";
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                connection.Open();
+                var command = new SqlCommand(sqlExpression, connection);
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.Add(new SqlParameter { ParameterName = "@id", Value = LotId });
+
+                var reader = command.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        Bets.Add(new Bet()
+                        {
+                            Id = (int)reader[0],
+                            Customer = new User() { Id = (int)reader[1] },
+                            Price = (decimal)reader[2],
+                            Date = (DateTime)reader[3]
+                        });
+                    }
+                }
+                reader.Close();
+            }
+            return Bets;
+        }
+        private Lot GetViewLotInfo(int id)
+        {
+            var LotInfo = new Lot();
+            LotInfo.Id = id;
+            string sqlExpression = "GetViewLotInfo";
+
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                connection.Open();
+                var command = new SqlCommand(sqlExpression, connection);
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.Add(new SqlParameter { ParameterName = "@id", Value = id });
+
+                var reader = command.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        LotInfo.Seller = new User() { Id = (int)reader[0] };
+                        LotInfo.Price = (decimal)reader[1];
+                        LotInfo.DateStart = (DateTime)reader[2];
+                        LotInfo.DateEnd = (DateTime)reader[3];
+                        LotInfo.Product = new Product()
+                        {
+                            Title = reader[4].ToString(),
+                            Company = reader[5].ToString(),
+                            Id = (int)reader[6],
+                            Status = (Common.Status)Enum.Parse(typeof(Common.Status), reader[7].ToString())
+                        };
+                    }
+                }
+                reader.Close();
+            }
+            return LotInfo;
+        }
+        private IEnumerable<Photo>GetAllProductPhotoById(int ProductId)
+        {
+            var Photos = new List<Photo>();
+            string sqlExpression = "GetProductPhotos";
+
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                connection.Open();
+                var command = new SqlCommand(sqlExpression, connection);
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.Add(new SqlParameter { ParameterName = "@id", Value = ProductId });
+
+                var reader = command.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        Photos.Add(new Photo()
+                        {
+                            Id = (int)reader[0],
+                            Comment = reader[1].ToString(),
+                            Path = reader[2].ToString()
+                        });
+                    }
+                }
+                reader.Close();
+            }
+            return Photos;
+        }
 
         public Product GetProductById()
-        {
-            return null;
-        }
-        public Lot GetLotById()
         {
             return null;
         }

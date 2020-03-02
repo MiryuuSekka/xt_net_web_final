@@ -37,5 +37,8 @@ namespace InterfaceBLL
         void DeleteUser(int Id);
         void ChangeUser(User NewData);
         #endregion
+
+        IEnumerable<Tag> GetProductTags(int LogId);
+        IEnumerable<Bet> GetAllLotsBet(int LotId);
     }
 }

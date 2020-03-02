@@ -123,6 +123,9 @@
     <Content Include="Pages\Autorisation\LogOut.cshtml" />
     <Content Include="Pages\Autorisation\NewUser.cshtml" />
     <Content Include="Pages\_LayoutClear.cshtml" />
+    <Content Include="Pages\User\List.cshtml" />
+    <Content Include="Pages\Product\Add.cshtml" />
+    <Content Include="Pages\Bet\Add.cshtml" />
     <None Include="Scripts\jquery-3.0.0-vsdoc.js" />
     <Content Include="Scripts\jquery-3.0.0.js" />
     <Content Include="Scripts\jquery-3.0.0.min.js" />

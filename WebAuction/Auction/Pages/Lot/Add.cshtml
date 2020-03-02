@@ -1,7 +1,7 @@
 ﻿@using Entity;
 @using Entity.Classes;
 @{
-    Layout = "~/Pages/_Layout.cshtml";
+    Layout = "~/Pages/_LayoutClear.cshtml";
 
     var code = new Auction.Code.Logic();
 }
@@ -14,9 +14,43 @@
     <link href="~/Content/bootstrap.css" rel="stylesheet" />
     <title></title>
 </head>
-<body >
-    <div>
+<body class="bg-dark">
+    <section class="jumbotron">
 
-    </div>
+        <h3>Add new lot</h3>
+        <h5>Product parameters:</h5>
+        <form action="/" method="post">
+            <div>
+
+                <div class="text-center d-flex justify-content-center" style="max-width:400px">
+                    <input type="text" class="form-control my-1" name="name" placeholder="Title" />
+                    <input type="text" class="form-control my-1" name="name" placeholder="Company" />
+                </div>
+                <div>
+                    <div class="btn-group btn-group-toggle  my-1" data-toggle="buttons">
+                        <label class="btn btn-outline-success active">
+                            <input type="radio" name="options" id="option1" autocomplete="off" checked> New
+                        </label>
+                        <label class="btn btn-outline-info">
+                            <input type="radio" name="options" id="option2" autocomplete="off"> Not opened
+                        </label>
+                        <label class="btn btn-outline-secondary">
+                            <input type="radio" name="options" id="option3" autocomplete="off"> Small defects
+                        </label>
+                        <label class="btn btn-outline-warning">
+                            <input type="radio" name="options" id="option3" autocomplete="off"> Medium defects
+                        </label>
+                        <label class="btn btn-outline-danger">
+                            <input type="radio" name="options" id="option3" autocomplete="off"> Big defects
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div style="margin-top:40px;">
+                <a class="btn btn-dark" href="~/Pages/Index.cshtml">Cancel</a>
+                <button class="btn btn-success">submit</button>
+            </div>
+        </form>
+    </section>
 </body>
 </html>
