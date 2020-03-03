@@ -202,7 +202,7 @@ namespace SQLBase.DB
 
         private void Delete(string TableName, int Id)
         {
-            var SqlCommand = $"DELETE FROM {TableName} WHERE Id={Id}";
+            var SqlCommand = $"DELETE FROM {TableName} WHERE id_user={Id}";
             using (var SqlConnection = new SqlConnection(ConnectionString))
             {
                 SqlConnection.Open();
@@ -213,6 +213,22 @@ namespace SQLBase.DB
         #endregion
 
         #region edit
+        public void Edit(User Edited)
+        {
+            string sqlExpression = "EditUser";
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                connection.Open();
+                var command = new SqlCommand(sqlExpression, connection);
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.Add(new SqlParameter { ParameterName = "@id", Value = Edited.Id });
+                command.Parameters.Add(new SqlParameter { ParameterName = "@role", Value = Edited.Role });
+                command.Parameters.Add(new SqlParameter { ParameterName = "@pass", Value = Edited.Password });
+                command.Parameters.Add(new SqlParameter { ParameterName = "@name", Value = Edited.Name });
+
+                var reader = command.ExecuteReader();
+            }
+        }
         #endregion
 
         #region get
@@ -245,6 +261,7 @@ namespace SQLBase.DB
                         photo.Path = reader[5].ToString();
                         photo.Comment = reader[6].ToString();
                         LotInfo.Product.Photos.Add(photo);
+                        LotInfo.Product.Id = (int)reader[7];
                     }
                 }
                 reader.Close();
@@ -525,13 +542,7 @@ namespace SQLBase.DB
 
 
         #endregion
-        public void Edit(User Edited)
-        {
-            SqlCommand = $"UPDATE {Table} SET name = '{Edited.Name}', password = '{Edited.Password}', id_role = {Edited.Role} WHERE Id={Edited.Id}";
 
-           // var common = new SqlCommon();
-            //common.SendToDB(ConnectionString, SqlCommand);
-        }
 
         public IEnumerable<User> GetAll_1()
         {

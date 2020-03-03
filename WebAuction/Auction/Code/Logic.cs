@@ -62,7 +62,6 @@ namespace Auction.Code
         //pay https://cdn0.iconfinder.com/data/icons/auction-and-competition-filled-outline-1/64/payment-credit_card-card-visa-512.png
         //add lot https://cdn0.iconfinder.com/data/icons/auction-and-competition-filled-outline-1/64/new_items-sign-tag-new-512.png
         //user management https://cdn0.iconfinder.com/data/icons/auction-and-competition-filled-outline-1/64/auctioneer-auction-hitting-512.png
-
-
+        
     }
 }

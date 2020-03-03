@@ -5,6 +5,7 @@
 
     var code = new Logic();
     List<User> Users;
+    var Roles = Enum.GetValues(typeof(Entity.Common.Role)).Cast<Entity.Common.Role>();
 }
 
 <!DOCTYPE html>
@@ -20,65 +21,48 @@
     {
         Users = code.Code.GetUsers().ToList();
 
-    <div>
         <div>
-            <h2 class="text-warning">Users:</h2>
-        </div>
-        @foreach (var item in Users)
-        {
-        <div class="card bg-secondary btn-outline-warning my-1 form-inline flex-row" >
-            <h3 class="text-white" style="margin:5px 50px">@item.Name </h3>
-            <div class="btn-group btn-group-toggle flex-row-reverse" data-toggle="buttons">
-                @if (item.Role.ToString().Equals("Admin"))
-                {
-                    <label class="btn btn-secondary active">
-                        <input type="radio" name="options" id="option1" autocomplete="off" checked> Admin
-                    </label>
-                    <label class="btn btn-secondary">
-                        <input type="radio" name="options" id="option2" autocomplete="off"> Seller
-                    </label>
-                    <label class="btn btn-secondary">
-                        <input type="radio" name="options" id="option3" autocomplete="off"> Customer
-                    </label>
-                }
-                else
-                {
-                    if (item.Role.ToString().Equals("Seller"))
-                    {
-                        <label class="btn btn-secondary">
-                            <input type="radio" name="options" id="option2" autocomplete="off"> Admin
-                        </label>
-                        <label class="btn btn-secondary active">
-                            <input type="radio" name="options" id="option1" autocomplete="off" checked> Seller
-                        </label>
-                        <label class="btn btn-secondary">
-                            <input type="radio" name="options" id="option3" autocomplete="off"> Customer
-                        </label>
-                    }
-                    else
-                    {
-                        if (item.Role.ToString().Equals("Customer"))
-                        {
-                            <label class="btn btn-secondary">
-                                <input type="radio" name="options" id="option2" autocomplete="off"> Admin
-                            </label>
-                            <label class="btn btn-secondary">
-                                <input type="radio" name="options" id="option3" autocomplete="off"> Seller
-                            </label>
-                            <label class="btn btn-secondary active">
-                                <input type="radio" name="options" id="option1" autocomplete="off" checked> Customer
-                            </label>
-                        }
-                    }
-
-                    <label class="btn btn-danger">
-                        <input type="radio" name="options" id="option4" autocomplete="off" checked> Delete
-                    </label>
-                }
+            <div>
+                <h2 class="text-warning">Users:</h2>
             </div>
+            @foreach (var item in Users)
+            {
+                if (item.Role != Entity.Common.Role.Guest && item.Id != Logic.CurrentUser.Id)
+                {
+                    <form class="form bg-white my-1 row">
+
+                        <h5 style="width:100px;">@item.Name</h5>
+
+                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                            <label class="btn btn-danger">
+                                <input type="radio" name="options" id="Delete" onclick="DeleteUser(@item.Id)" autocomplete="off">
+                                Delete
+                            </label>
+                            @foreach (var roleItem in Roles)
+                            {
+                                if (roleItem != Entity.Common.Role.Guest)
+                                {
+                                    if (item.Role == roleItem)
+                                    {
+                                        <label class="btn btn-secondary active">
+                                            <input type="radio" name="options" onclick="ChangeUserRole('@item.Id', '@roleItem')" autocomplete="off" checked>
+                                            @roleItem.ToString()
+                                        </label>
+                                    }
+                                    else
+                                    {
+                                        <label class="btn btn-secondary">
+                                            <input type="radio" name="options" onclick="ChangeUserRole('@item.Id', '@roleItem')" autocomplete="off">
+                                            @roleItem.ToString()
+                                        </label>
+                                    }
+                                }
+                            }
+                        </div>
+                    </form>
+                }
+            }
         </div>
-        }
-    </div>
     }
     else
     {
@@ -94,5 +78,9 @@
             </div>
         </section>
     }
+
+    <script src="~/Scripts/jquery-3.0.0.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Code/Action.js"></script>
 </body>
 </html>

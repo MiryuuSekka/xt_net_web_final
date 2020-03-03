@@ -59,6 +59,7 @@ namespace SQLBase
 
         public void ChangeUser(User NewData)
         {
+            DataBase.Edit(NewData);
         }
         #endregion
 

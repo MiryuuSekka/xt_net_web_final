@@ -5,6 +5,8 @@
 
     var code = new Logic();
     var Lots = code.Code.GetLots();
+    var tag = Request["tag"];
+    var tags = new List<Entity.Classes.Tag>();
 }
 
 <!DOCTYPE html>
@@ -38,6 +40,13 @@
                 <div class="row">
                     @foreach (var item in Lots)
                     {
+                        if (tag != null)
+                        {
+                            tags = code.Code.GetProductTags(item.Product.Id).ToList();
+                        }
+                        if (tag== null || tags.FirstOrDefault(x => x.Id.ToString() == tag) != null)
+                        {
+
                         <div class="col-md-4">
                             <div class="card mb-4 shadow-lg">
                                 <svg xmlns="http://www.w3.org/2000/svg"
@@ -86,6 +95,7 @@
                                 </div>
                             </div>
                         </div>
+                        }
                     }
                 </div>
             </div>

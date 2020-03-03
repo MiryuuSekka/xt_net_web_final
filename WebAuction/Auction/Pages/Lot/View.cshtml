@@ -3,8 +3,9 @@
 @using Entity.Classes;
 @{
     Layout = "~/Pages/_Layout.cshtml";
-    
+
     var Bets = new List<Bet>();
+    var tags = new List<Tag>();
     var code = new Auction.Code.Logic();
     Lot Lot = null;
     var LotId = Request["id"];
@@ -13,7 +14,7 @@
         int.TryParse(LotId, out int id);
         Lot = code.Code.GetLotById(id);
 
-        var tags = code.Code.GetProductTags(id);
+        tags = code.Code.GetProductTags(id).ToList();
         Bets = code.Code.GetAllLotsBet(id).ToList();
         if (Bets.Count > 0)
         {
@@ -111,6 +112,12 @@
                 </form>
                     }
                 }
+                <div class="flex-row form-inline border-dark">
+                    @foreach (var item in tags)
+                    {
+                        <a href="~/Pages/Index.cshtml?tag=@item.Id" class="badge badge-warning">@item.Title</a>
+                    }
+                </div>
             </div>
         </section>
     }

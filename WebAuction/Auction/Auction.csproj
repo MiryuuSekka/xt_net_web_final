@@ -90,6 +90,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Code\Action.js" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-reboot.css" />
@@ -126,6 +127,7 @@
     <Content Include="Pages\User\List.cshtml" />
     <Content Include="Pages\Product\Add.cshtml" />
     <Content Include="Pages\Bet\Add.cshtml" />
+    <Content Include="Pages\User\Edit.cshtml" />
     <None Include="Scripts\jquery-3.0.0-vsdoc.js" />
     <Content Include="Scripts\jquery-3.0.0.js" />
     <Content Include="Scripts\jquery-3.0.0.min.js" />

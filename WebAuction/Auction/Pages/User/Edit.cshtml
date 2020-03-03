@@ -1,0 +1,34 @@
+﻿@using Auction.Code;
+@{
+    Layout = null;
+
+    var code = new Logic();
+    int.TryParse(Request["id"], out int id);
+    var Role = Request["role"];
+    var roles = Enum.GetValues(typeof(Entity.Common.Role));
+    int role = 0;
+    int count = 1;
+    foreach (var item in roles)
+    {
+        if (item.ToString() == Role)
+        {
+            role = count;
+        }
+        count++;
+    }
+
+    //int.TryParse(Request["role"], out role);
+    var IsDelete = Request["d"] == "y";
+
+    if (IsDelete)
+    {
+        code.Code.DeleteUser(id);
+    }
+    else {
+        var User = code.Code.GetUserById(id);
+        User.Role = (Entity.Common.Role)role;
+        code.Code.ChangeUser(User);
+    }
+
+    Response.Redirect("~/Pages/User/List.cshtml");
+}
