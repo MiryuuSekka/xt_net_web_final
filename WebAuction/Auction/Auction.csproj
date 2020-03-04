@@ -128,6 +128,8 @@
     <Content Include="Pages\Product\Add.cshtml" />
     <Content Include="Pages\Bet\Add.cshtml" />
     <Content Include="Pages\User\Edit.cshtml" />
+    <Content Include="Pages\Lot\AddTag.cshtml" />
+    <Content Include="Pages\_LayoutIndex.cshtml" />
     <None Include="Scripts\jquery-3.0.0-vsdoc.js" />
     <Content Include="Scripts\jquery-3.0.0.js" />
     <Content Include="Scripts\jquery-3.0.0.min.js" />

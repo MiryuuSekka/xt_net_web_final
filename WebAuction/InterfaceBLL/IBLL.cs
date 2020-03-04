@@ -5,10 +5,28 @@ namespace InterfaceBLL
 {
     public interface IBLL
     {
+        int AddBet(Bet NewData);
+        int AddUser(User NewData);
+
+        void DeleteUser(int Id);
+        
+        void ChangeUser(User NewData);
+
+        Lot GetLotById(int Id);
+        User GetUserById(int Id);
+
+        IEnumerable<Lot> GetLots();
+        IEnumerable<User> GetUsers();
+
+        IEnumerable<Tag> GetProductTags(int LogId);
+        IEnumerable<Bet> GetAllLotsBet(int LotId);
+
+        decimal GetMaxPriceOfLot(int LotId);
+
+        /*
         #region Lot
         int AddLot(Lot NewData);
         IEnumerable<Lot> GetLots();
-        Lot GetLotById(int Id);
         IEnumerable<Lot> GetLotByTag(string Tag);
         void DeleteLot(int Id);
         void ChangeLot(Lot NewData);
@@ -23,22 +41,15 @@ namespace InterfaceBLL
         #endregion
 
         #region Bet
-        int AddBet(Bet NewData);
         IEnumerable<Bet> GetBets();
         Bet GetBetById(int Id);
         void DeleteBet(int Id);
-        void ChangeBet(Bet NewData);
         #endregion
 
         #region User
-        int AddUser(User NewData);
-        IEnumerable<User> GetUsers();
-        User GetUserById(int Id);
-        void DeleteUser(int Id);
-        void ChangeUser(User NewData);
         #endregion
+        */
 
-        IEnumerable<Tag> GetProductTags(int LogId);
-        IEnumerable<Bet> GetAllLotsBet(int LotId);
+
     }
 }

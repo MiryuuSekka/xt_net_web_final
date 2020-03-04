@@ -13,7 +13,7 @@ namespace SQLBase.DB
     {
         private string ConnectionString;
         private string SqlCommand;
-        private string Table;
+        private string sqlExpression;
 
         public SqlRead()
         {
@@ -23,7 +23,7 @@ namespace SQLBase.DB
         #region add
         public int AddData(User data)
         {
-            string sqlExpression = "AddUser";
+            sqlExpression = "AddUser";
 
             using (var connection = new SqlConnection(ConnectionString))
             {
@@ -40,7 +40,7 @@ namespace SQLBase.DB
         }
         public int AddData(Bet data)
         {
-            string sqlExpression = "AddBet";
+            sqlExpression = "AddBet";
 
             using (var connection = new SqlConnection(ConnectionString))
             {
@@ -59,7 +59,7 @@ namespace SQLBase.DB
         }
         public int AddData(Lot data)
         {
-            string sqlExpression = "AddLot";
+            sqlExpression = "AddLot";
 
             using (var connection = new SqlConnection(ConnectionString))
             {
@@ -79,7 +79,7 @@ namespace SQLBase.DB
         }
         public int AddData(Photo data)
         {
-            string sqlExpression = "AddPhoto";
+            sqlExpression = "AddPhoto";
 
             using (var connection = new SqlConnection(ConnectionString))
             {
@@ -96,7 +96,7 @@ namespace SQLBase.DB
         }
         public int AddData(Product data)
         {
-            string sqlExpression = "AddProduct";
+            sqlExpression = "AddProduct";
 
             using (var connection = new SqlConnection(ConnectionString))
             {
@@ -114,7 +114,7 @@ namespace SQLBase.DB
         }
         public int AddTag(string title)
         {
-            string sqlExpression = "AddTag";
+            sqlExpression = "AddTag";
 
             using (var connection = new SqlConnection(ConnectionString))
             {
@@ -131,7 +131,7 @@ namespace SQLBase.DB
 
         public int AddConnectPhotoToProduct(int Photo, int Product)
         {
-            string sqlExpression = "AddPhotoToProduct";
+            sqlExpression = "AddPhotoToProduct";
 
             using (var connection = new SqlConnection(ConnectionString))
             {
@@ -148,7 +148,7 @@ namespace SQLBase.DB
         }
         public int AddConnectTagToLot(int Tag, int Lot)
         {
-            string sqlExpression = "AddTagToLot";
+            sqlExpression = "AddTagToLot";
 
             using (var connection = new SqlConnection(ConnectionString))
             {
@@ -168,41 +168,48 @@ namespace SQLBase.DB
         #region delete
         public void DeleteUser(int id)
         {
-            Delete("UserTable", id);
+            var UserLots = GetAllShortLotInfo().Where(x => x.Seller.Id == id);
+            foreach (var item in UserLots)
+            {
+                DeleteLot(item.Id);
+            }
+            Delete("BetTable", "id_user", id);
+            Delete("UserTable", "id_user", id);
         }
         public void DeleteBet(int id)
         {
-            Delete("BetTable", id);
+            Delete("BetTable", "id_bet", id);
         }
         public void DeleteLot(int id)
         {
-            Delete("LotTable", id);
+            Delete("LotTable", "id_lot", id);
+            Delete("LotTags", "id_lot", id);
+            Delete("BetTable", "id_lot", id);
         }
         public void DeletePhoto(int id)
         {
-            Delete("PhotoTable", id);
+            Delete("PhotoTable", "id_photo", id);
+            Delete("ProductPhoto", "id_photo", id);
         }
         public void DeleteProduct(int id)
         {
-            Delete("ProductTable", id);
+            var Lots = GetAllShortLotInfo().Where(x=>x.Product.Id==id);
+            foreach (var item in Lots)
+            {
+                DeleteLot(item.Id);
+            }
+            Delete("ProductTable", "id_product", id);
+            Delete("ProductPhoto", "id_product", id);
         }
         public void DeleteTag(int id)
         {
-            Delete("TagTable", id);
+            Delete("TagTable", "id_tag", id);
+            Delete("LotTags", "id_tag", id);
         }
 
-        public void DeleteProductPhoto(int id)
+        private void Delete(string TableName, string ColumnName, int Id)
         {
-            Delete("ProductPhoto", id);
-        }
-        public void DeleteLotTags(int id)
-        {
-            Delete("LotTags", id);
-        }
-
-        private void Delete(string TableName, int Id)
-        {
-            var SqlCommand = $"DELETE FROM {TableName} WHERE id_user={Id}";
+            var SqlCommand = $"DELETE FROM {TableName} WHERE {ColumnName}={Id}";
             using (var SqlConnection = new SqlConnection(ConnectionString))
             {
                 SqlConnection.Open();
@@ -215,7 +222,7 @@ namespace SQLBase.DB
         #region edit
         public void Edit(User Edited)
         {
-            string sqlExpression = "EditUser";
+            sqlExpression = "EditUser";
             using (var connection = new SqlConnection(ConnectionString))
             {
                 connection.Open();
@@ -238,8 +245,8 @@ namespace SQLBase.DB
             LotInfo.Product = new Product();
             LotInfo.Product.Photos = new List<Photo>();
             var photo = new Photo();
-            string sqlExpression = "GetLotShortInfo";
 
+            sqlExpression = "GetLotShortInfo";
             using (var connection = new SqlConnection(ConnectionString))
             {
                 connection.Open();
@@ -271,8 +278,8 @@ namespace SQLBase.DB
         private IEnumerable<int> GetLotsId()
         {
             var result = new List<int>();
-            string sqlExpression = "GetLotsId";
 
+            sqlExpression = "GetLotsId";
             using (var connection = new SqlConnection(ConnectionString))
             {
                 connection.Open();
@@ -304,8 +311,8 @@ namespace SQLBase.DB
         public IEnumerable<User> GetAllUser()
         {
             var result = new List<User>();
-            string sqlExpression = "GetUsers";
 
+            sqlExpression = "GetUsers";
             using (var connection = new SqlConnection(ConnectionString))
             {
                 connection.Open();
@@ -333,8 +340,8 @@ namespace SQLBase.DB
         public User GetUserById(int id)
         {
             var UserInfo = new User();
-            string sqlExpression = "GetUserById";
 
+            sqlExpression = "GetUserById";
             using (var connection = new SqlConnection(ConnectionString))
             {
                 connection.Open();
@@ -370,7 +377,8 @@ namespace SQLBase.DB
         public IEnumerable<Tag>GetProductTags(int LogId)
         {
             var Tags = new List<Tag>();
-            string sqlExpression = "GetTagByLotId";
+
+            sqlExpression = "GetTagByLotId";
             using (var connection = new SqlConnection(ConnectionString))
             {
                 connection.Open();
@@ -398,7 +406,8 @@ namespace SQLBase.DB
         public IEnumerable<Bet> GetAllLotsBet(int LotId)
         {
             var Bets = new List<Bet>();
-            string sqlExpression = "GetBetsAtLot";
+
+            sqlExpression = "GetBetsAtLot";
             using (var connection = new SqlConnection(ConnectionString))
             {
                 connection.Open();
@@ -429,8 +438,8 @@ namespace SQLBase.DB
         {
             var LotInfo = new Lot();
             LotInfo.Id = id;
-            string sqlExpression = "GetViewLotInfo";
 
+            sqlExpression = "GetViewLotInfo";
             using (var connection = new SqlConnection(ConnectionString))
             {
                 connection.Open();
@@ -464,8 +473,8 @@ namespace SQLBase.DB
         private IEnumerable<Photo>GetAllProductPhotoById(int ProductId)
         {
             var Photos = new List<Photo>();
-            string sqlExpression = "GetProductPhotos";
 
+            sqlExpression = "GetProductPhotos";
             using (var connection = new SqlConnection(ConnectionString))
             {
                 connection.Open();
@@ -499,11 +508,11 @@ namespace SQLBase.DB
 
         public IEnumerable<Product> GetAllProduct()
         {
-            SqlCommand = "ProductSummary";
             var result = new List<Product>();
             int id;
             Product data;
 
+            SqlCommand = "ProductSummary";
             using (var SqlConnection = new SqlConnection(ConnectionString))
             {
                 SqlConnection.Open();
@@ -538,81 +547,6 @@ namespace SQLBase.DB
             }
             return result;
         }
-        
-
-
         #endregion
-
-
-        public IEnumerable<User> GetAll_1()
-        {
-            SqlCommand = $"SELECT {Table}.id, {Table}.name, {Table}.password, roles.title FROM {Table} LEFT JOIN roles ON roles.id = {Table}.id_role";
-            var result = new List<User>();
-            using (var SqlConnection = new SqlConnection(ConnectionString))
-            {
-                SqlConnection.Open();
-                var command = new SqlCommand(SqlCommand, SqlConnection);
-                using (SqlDataReader reader = command.ExecuteReader())
-                {
-                    while (reader.Read())
-                    {
-                        var data = new User
-                        {
-                            Name = reader["name"].ToString(),
-                            Id = (int)reader["id"],
-                            Password = reader["password"].ToString(),
-                            Role = (Entity.Common.Role)Enum.Parse(typeof(Entity.Common.Role), reader["title"].ToString())
-                        };
-                        result.Add(data);
-                    }
-                }
-            }
-            return result;
-        }
-
-        private void Add111(string name, int age)
-        {
-            string sqlExpression = "sp_InsertUser";
-
-            using (var connection = new SqlConnection(ConnectionString))
-            {
-                connection.Open();
-                var command = new SqlCommand(sqlExpression, connection);
-                command.CommandType = CommandType.StoredProcedure;
-
-                var nameParam = new SqlParameter { ParameterName = "@name", Value = name };
-                command.Parameters.Add(nameParam);
-
-                var ageParam = new SqlParameter { ParameterName = "@age", Value = age };
-                command.Parameters.Add(ageParam);
-
-                var result = command.ExecuteScalar();
-            }
-        }
-        
-        private void Get111()
-        {
-            string sqlExpression = "sp_GetUsers";
-
-            using (var connection = new SqlConnection(ConnectionString))
-            {
-                connection.Open();
-                var command = new SqlCommand(sqlExpression, connection);
-                command.CommandType = CommandType.StoredProcedure;
-                var reader = command.ExecuteReader();
-
-                if (reader.HasRows)
-                {
-                    while (reader.Read())
-                    {
-                        int id = reader.GetInt32(0);
-                        string name = reader.GetString(1);
-                        int age = reader.GetInt32(2);
-                    }
-                }
-                reader.Close();
-            }
-        }
-        
     }
 }

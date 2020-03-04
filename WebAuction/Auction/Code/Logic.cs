@@ -28,6 +28,7 @@ namespace Auction.Code
             all = all.Where(x => x.Password == password);
             return all.Count() > 0;
         }
+
         public bool IsUserExist(string name)
         {
             var all = Code.GetUsers();
@@ -40,7 +41,7 @@ namespace Auction.Code
             return "https://cdn1.iconfinder.com/data/icons/business-minimal/512/money_Business_dollar_Cash_Finance_currency_Payment_finance_Coin-128.png";
         }
 
-            public string GetUserIcon(Entity.Common.Role role)
+        public string GetUserIcon(Entity.Common.Role role)
         {
             switch (role)
             {
@@ -54,6 +55,7 @@ namespace Auction.Code
                     return "https://cdn3.iconfinder.com/data/icons/stars-5/512/disabled_star-512.png";
             }
         }
+
         //main icon https://cdn2.iconfinder.com/data/icons/money-finance/512/auction-hammer-512.png
         //add bet https://cdn0.iconfinder.com/data/icons/auction-and-competition-filled-outline-1/64/offer-offering-hand-give-bid-bidding-auction-512.png
         //sold https://cdn0.iconfinder.com/data/icons/auction-and-competition-filled-outline-1/64/sold-sign-label-tag-512.png

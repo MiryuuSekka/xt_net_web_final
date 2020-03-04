@@ -1,10 +1,7 @@
 ﻿using Entity.Classes;
 using InterfaceDAL;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AuctionBLL
 {
@@ -19,11 +16,82 @@ namespace AuctionBLL
                 this.Dal = Dal;
             }
 
-            #region add
+            #region Add
             public int AddBet(Bet NewData)
             {
                 return Dal.AddBet(NewData);
             }
+            public int AddUser(User NewData)
+            {
+                return Dal.AddUser(NewData);
+            }
+
+            #endregion
+
+            #region delete            
+            public void DeleteUser(int Id)
+            {
+                var user = GetUserById(Id);
+                if (user != null)
+                {
+                    Dal.DeleteUser(Id);
+                }
+            }
+
+            #endregion
+
+            #region edit
+            public void ChangeUser(User NewData)
+            {
+                Dal.ChangeUser(NewData);
+            }
+
+            #endregion
+
+            #region get       
+            public Lot GetLotById(int Id)
+            {
+                return Dal.GetLotById(Id);
+            }
+            public User GetUserById(int Id)
+            {
+                return Dal.GetUserById(Id);
+            }
+            public decimal GetMaxPriceOfLot(int LotId)
+            {
+                var Lot = GetLotById(LotId);
+                var Max = GetAllLotsBet(LotId).Max(x=>x.Price);
+                if (Max > 0)
+                {
+                    return Max;
+                }
+                return Lot.Price;
+            }
+
+            public IEnumerable<Lot> GetLots()
+            {
+                return Dal.GetLots();
+            }
+            public IEnumerable<User> GetUsers()
+            {
+                return Dal.GetUsers();
+            }
+
+            public IEnumerable<Tag> GetProductTags(int LogId)
+            {
+                return Dal.GetProductTags(LogId);
+            }
+            public IEnumerable<Bet> GetAllLotsBet(int LotId)
+            {
+                return Dal.GetAllLotsBet(LotId);
+            }
+
+            #endregion
+
+
+            /*
+            #region add
+
 
             public int AddLot(Lot NewData)
             {
@@ -35,17 +103,9 @@ namespace AuctionBLL
                 return Dal.AddProduct(NewData);
             }
 
-            public int AddUser(User NewData)
-            {
-                return Dal.AddUser(NewData);
-            }
             #endregion
 
             #region change
-            public void ChangeBet(Bet NewData)
-            {
-                Dal.ChangeBet(NewData);
-            }
 
             public void ChangeLot(Lot NewData)
             {
@@ -57,10 +117,7 @@ namespace AuctionBLL
                 Dal.ChangeProduct(NewData);
             }
 
-            public void ChangeUser(User NewData)
-            {
-                Dal.ChangeUser(NewData);
-            }
+
             #endregion
 
             #region delete
@@ -91,14 +148,7 @@ namespace AuctionBLL
                 }
             }
 
-            public void DeleteUser(int Id)
-            {
-                var user = GetUserById(Id);
-                if (user != null)
-                {
-                    Dal.DeleteUser(Id);
-                }
-            }
+
             #endregion
 
             #region get
@@ -112,20 +162,14 @@ namespace AuctionBLL
                 return Dal.GetBets();
             }
 
-            public Lot GetLotById(int Id)
-            {
-                return Dal.GetLotById(Id);
-            }
+
 
             public IEnumerable<Lot> GetLotByTag(string Tag)
             {
                 return Dal.GetLotByTag(Tag);
             }
 
-            public IEnumerable<Lot> GetLots()
-            {
-                return Dal.GetLots();
-            }
+
 
             public Product GetProductById(int Id)
             {
@@ -136,26 +180,8 @@ namespace AuctionBLL
             {
                 return Dal.GetProducts();
             }
-
-            public User GetUserById(int Id)
-            {
-                return Dal.GetUserById(Id);
-            }
-
-            public IEnumerable<User> GetUsers()
-            {
-                return Dal.GetUsers();
-            }
             #endregion
-
-            public IEnumerable<Tag> GetProductTags(int LogId)
-            {
-                return Dal.GetProductTags(LogId);
-            }
-            public IEnumerable<Bet> GetAllLotsBet(int LotId)
-            {
-                return Dal.GetAllLotsBet(LotId);
-            }
+        */
         }
     }
 }

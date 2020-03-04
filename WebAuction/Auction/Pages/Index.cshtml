@@ -44,57 +44,50 @@
                         {
                             tags = code.Code.GetProductTags(item.Product.Id).ToList();
                         }
-                        if (tag== null || tags.FirstOrDefault(x => x.Id.ToString() == tag) != null)
+                        if (tag == null || tags.FirstOrDefault(x => x.Id.ToString() == tag) != null)
                         {
 
-                        <div class="col-md-4">
-                            <div class="card mb-4 shadow-lg">
-                                <svg xmlns="http://www.w3.org/2000/svg"
-                                     class="bd-placeholder-img card-img-top"
-                                     width="=100%" height="1" role="img">
-                                    <img src="@item.Product.Photos[0].Path"
-                                         alt="@item.Product.Photos[0].Comment"
-                                         style="width:100%; height:100%;" />
-                                </svg>
-                                <div class="card-body">
-                                    <div class="d-flex justify-content-between align-items-center container">
-                                        <p class="text-body">last price</p>
-                                        <p class="text-success">@item.Price $</p>
-                                    </div>
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <div class="btn-group">
-                                            <a class="btn btn-sm btn-outline-dark"
-                                               href="~/Pages/Lot/View.cshtml?id=@item.Id">
-                                                View
-                                            </a>
-                                            @if (Logic.CurrentUser.Role.Equals(Common.Role.Admin))
-                                            {
-                                                <button class="btn btn-sm btn-outline-info">Edit</button>
-                                            }
-
-                                            @if (Logic.CurrentUser.Role.Equals(Common.Role.Seller))
-                                            {
-                                                if (Logic.CurrentUser.Id.Equals(item.Seller.Id))
+                            <div class="col-md-4">
+                                <div class="card mb-4 shadow-lg">
+                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                         class="bd-placeholder-img card-img-top"
+                                         width="=100%" height="1" role="img">
+                                        <img src="@item.Product.Photos[0].Path"
+                                             alt="@item.Product.Photos[0].Comment"
+                                             style="width:100%; height:100%;" />
+                                    </svg>
+                                    <div class="card-body container" style="margin:auto">
+                                        <div>
+                                            <div>
+                                                @if (item.DateEnd < DateTime.Now)
                                                 {
-                                                    <button class="btn btn-sm btn-outline-info">Edit</button>
+                                                    <small class="text-danger">@Helper.GetCountdown(DateTime.Now, item.DateEnd)</small>
                                                 }
                                                 else
                                                 {
-                                                    <button class="btn btn-sm btn-outline-success">Bet</button>
+                                                    <small class="text-muted">@Helper.GetCountdown(DateTime.Now, item.DateEnd) to close</small>
                                                 }
-                                            }
-
-                                            @if (Logic.CurrentUser.Role.Equals(Common.Role.Customer))
+                                            </div>
+                                            <div>
+                                                <small>Last price: </small>
+                                                <small class="text-success">@code.Code.GetMaxPriceOfLot(item.Id) $</small>
+                                            </div>
+                                        </div>
+                                        <div class="btn-group d-flex justify-content-center">
+                                            <a class="btn btn-sm btn-outline-dark" href="~/Pages/Lot/View.cshtml?id=@item.Id">
+                                                View
+                                            </a>
+                                            @if (Logic.CurrentUser.Role.Equals(Common.Role.Admin) ||
+                                                (Logic.CurrentUser.Role.Equals(Common.Role.Seller) &&
+                                                Logic.CurrentUser.Id.Equals(item.Seller.Id)))
                                             {
-                                                <button class="btn btn-sm btn-outline-success">Bet</button>
+                                                <button class="btn btn-sm btn-outline-info">Edit</button>
+                                                <button class="btn btn-sm btn-outline-danger">Close</button>
                                             }
                                         </div>
-
-                                        <small class="text-muted">@Helper.GetCountdown(item.DateStart, item.DateEnd)</small>
                                     </div>
                                 </div>
                             </div>
-                        </div>
                         }
                     }
                 </div>

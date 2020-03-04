@@ -1,11 +1,7 @@
-﻿using Entity;
-using Entity.Classes;
+﻿using Entity.Classes;
 using SQLBase.DB;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Configuration;
-using System.Data.SqlClient;
 
 namespace SQLBase
 {
@@ -42,10 +38,6 @@ namespace SQLBase
 
 
         #region change
-        public void ChangeBet(Bet NewData)
-        {
-            throw new NotImplementedException();
-        }
 
         public void ChangeLot(Lot NewData)
         {

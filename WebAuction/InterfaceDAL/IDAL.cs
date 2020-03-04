@@ -27,7 +27,6 @@ namespace InterfaceDAL
         IEnumerable<Bet> GetBets();
         Bet GetBetById(int Id);
         void DeleteBet(int Id);
-        void ChangeBet(Bet NewData);
         #endregion
 
         #region User

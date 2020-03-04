@@ -17,5 +17,13 @@
             MediumDefects = 4,
             BigDefects = 5
         }
+        public enum MessageTheme
+        {
+            Deleted = 1,
+            Win = 2,
+            Lose = 3,
+            TimeOut = 4,
+            Sold = 5
+        }
     }
 }
