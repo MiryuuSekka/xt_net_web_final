@@ -20,14 +20,9 @@ namespace SQLBase
             return DataBase.AddData(NewData);
         }
 
-        public int AddLot(Lot NewData)
+        public int AddLot(Lot NewData, List<Tag> Tags)
         {
-           return DataBase.AddData(NewData);
-        }
-
-        public int AddProduct(Product NewData)
-        {
-            return DataBase.AddData(NewData);
+           return DataBase.AddLot(NewData, Tags);
         }
 
         public int AddUser(User NewData)
@@ -121,6 +116,11 @@ namespace SQLBase
         public IEnumerable<Tag> GetProductTags(int LogId)
         {
             return DataBase.GetProductTags(LogId);
+        }
+
+        public IEnumerable<Tag> GetTags()
+        {
+            return DataBase.GetTags();
         }
 
         public User GetUserById(int Id)

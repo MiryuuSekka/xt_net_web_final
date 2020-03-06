@@ -123,14 +123,24 @@
                     }
                     else
                     {
-                        <div class="flex-row form-inline">
-                            <h6>Auction is open:</h6>
-                            <h6 style="margin-left:10px">@Lot.DateStart.ToString("dd.MM.yyyy") - @Lot.DateEnd.ToString("dd.MM.yyyy")</h6>
-                        </div>
-                        <div class="flex-row form-inline">
-                            <h6>Days left:</h6>
-                            <h6 style="margin-left:10px">(@Helper.GetCountdown(DateTime.Now, Lot.DateEnd))</h6>
-                        </div>
+                        if (Lot.DateStart > DateTime.Now)
+                        {
+                            <div class="flex-row form-inline">
+                                <h6>Auction will open: </h6>
+                                <h6 class="text-info" style="margin-left:10px">@Lot.DateStart.ToString("dd.MM.yyyy")</h6>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="flex-row form-inline">
+                                <h6>Auction is open:</h6>
+                                <h6 style="margin-left:10px">@Lot.DateStart.ToString("dd.MM.yyyy") - @Lot.DateEnd.ToString("dd.MM.yyyy")</h6>
+                            </div>
+                            <div class="flex-row form-inline">
+                                <h6>Days left:</h6>
+                                <h6 style="margin-left:10px">(@Helper.GetCountdown(DateTime.Now, Lot.DateEnd))</h6>
+                            </div>
+                        }
                     }
                     <div class="flex-row form-inline">
                         <h6>Last price:</h6>
@@ -151,7 +161,7 @@
                 </div>
             }
 
-            @if (Lot.DateEnd > DateTime.Now)
+            @if (Lot.DateEnd > DateTime.Now && Lot.DateStart < DateTime.Now)
             {
                 if (!Logic.CurrentUser.Role.Equals(Common.Role.Admin) && !Logic.CurrentUser.Role.Equals(Common.Role.Guest))
                 {

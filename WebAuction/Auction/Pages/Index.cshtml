@@ -23,9 +23,7 @@
         <section class="jumbotron text-center">
             <div class="container">
                 <h1>Hello, @Logic.CurrentUser.Name</h1>
-                <p class="lead text-muted">
-                    Join
-                </p>
+                <p class="lead text-muted"> Join </p>
                 <p>
                     <a href="~/Pages/Autorisation/LogIn.cshtml" class="btn btn-info">log in</a>
                     <a href="~/Pages/Autorisation/NewUser.cshtml" class="btn btn-danger">Create new account</a>
@@ -42,7 +40,7 @@
                     {
                         if (tag != null)
                         {
-                            tags = code.Code.GetProductTags(item.Product.Id).ToList();
+                            tags = code.Code.GetProductTags(item.Id).ToList();
                         }
                         if (tag == null || tags.FirstOrDefault(x => x.Id.ToString() == tag) != null)
                         {
@@ -65,7 +63,14 @@
                                                 }
                                                 else
                                                 {
-                                                    <small class="text-muted">@Helper.GetCountdown(DateTime.Now, item.DateEnd) to close</small>
+                                                    if (item.DateStart > DateTime.Now)
+                                                    {
+                                                        <small class="text-info">@Helper.GetCountdown(DateTime.Now, item.DateStart) to open</small>
+                                                    }
+                                                    else
+                                                    {
+                                                        <small class="text-muted">@Helper.GetCountdown(DateTime.Now, item.DateEnd) to close</small>
+                                                    }
                                                 }
                                             </div>
                                             <div>
@@ -94,8 +99,5 @@
             </div>
         </div>
     }
-    <div>
-
-    </div>
 </body>
 </html>

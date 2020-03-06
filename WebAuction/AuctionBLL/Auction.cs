@@ -25,7 +25,10 @@ namespace AuctionBLL
             {
                 return Dal.AddUser(NewData);
             }
-
+            public int AddLot(Lot NewData, List<Tag> Tags)
+            {
+                return Dal.AddLot(NewData, Tags);
+            }
             #endregion
 
             #region delete            
@@ -60,9 +63,11 @@ namespace AuctionBLL
             public decimal GetMaxPriceOfLot(int LotId)
             {
                 var Lot = GetLotById(LotId);
-                var Max = GetAllLotsBet(LotId).Max(x=>x.Price);
-                if (Max > 0)
+                var bets = GetAllLotsBet(LotId);
+                decimal Max;
+                if (bets.Count()>0)
                 {
+                    Max = bets.Max(x => x.Price);
                     return Max;
                 }
                 return Lot.Price;
@@ -85,7 +90,10 @@ namespace AuctionBLL
             {
                 return Dal.GetAllLotsBet(LotId);
             }
-
+            public IEnumerable<Tag> GetTags()
+            {
+                return Dal.GetTags();
+            }
             #endregion
 
 

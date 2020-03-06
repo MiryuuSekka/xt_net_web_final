@@ -23,10 +23,53 @@ function DeleteUser(userId) {
 
 $('#exampleModal').on('show.bs.modal', function (event) {
     var button = $(event.relatedTarget) // Button that triggered the modal
-    var recipient = button.data('whatever') // Extract info from data-* attributes
-    // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-    // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+    //var recipient = button.data('whatever') // Extract info from data-* attributes
+
     var modal = $(this)
-    modal.find('.modal-title').text('New message to ' + recipient)
-    modal.find('.modal-body input').val(recipient)
+    modal.find('.modal-title').text('Add new Lot')
+    modal.find('.modal-body input').val();
+    //modal.find('.modal-body input').val(recipient)
 })
+
+function AddLot(Title, Company, Status, DateStart, DateEnd, Price, img1, img2, img3) {
+    var url = "";
+    var lot = {
+        Title: Title,
+        Company: Company,
+        Status: Status,
+        DateStart: DateStart,
+        DateEnd: DateEnd,
+        Price: Price,
+        img1: img1,
+        img2: img2,
+        img3: img3
+    }
+    $.ajax({
+        url: url,
+        type: "POST",
+        success: function (result) {
+            console.log(result)
+        },
+        error: function (result) {
+            console.log(result)
+        }
+    })
+}
+
+/*
+$('#exampleModal').on('hidden.bs.modal', function (e) {
+    //parent.postMessage($("#mainContent").height() + 1, "*");
+
+});
+
+
+
+function ChangeUserRole(step) {
+    modal.find('.modal-body input').val(step++);
+    alert("CCC");
+}
+
+$("#myModal").on("hide.bs.modal", function () {
+    alert("BBB");
+});
+*/

@@ -1,6 +1,8 @@
 ﻿using Entity.Classes;
 using InterfaceBLL;
 using Resolver;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Auction.Code
@@ -56,6 +58,53 @@ namespace Auction.Code
             }
         }
 
+
+        public Lot ParseLot(string start, string end, string price)
+        {
+            var newLot = new Lot();
+            
+            decimal.TryParse(price, out decimal Price);
+            newLot.Price = Price;
+            
+            DateTime.TryParse(start, out DateTime dateStart);
+            newLot.DateStart = dateStart;
+            
+            DateTime.TryParse(end, out DateTime dateEnd);
+            newLot.DateEnd = dateEnd;
+
+            return newLot;
+        }
+
+        public Product ParseProduct(string Title, string Company, string status)
+        {
+            var Product = new Product();
+            Product.Title = Title;
+            Product.Company = Company;
+            int.TryParse(status, out int statusInt);
+            statusInt++;
+            Product.Status = (Entity.Common.Status)statusInt;
+
+            return Product;
+        }
+
+        public IEnumerable<Photo> ParsePhoto(string Title, string path1, string path2, string path3)
+        {
+            var Photos = new List<Photo>();
+            if (path1.Length>0)
+            {
+                Photos.Add(new Photo() { Path = path1, Comment = Title });
+            }
+            if (path2.Length > 0)
+            {
+                Photos.Add(new Photo() { Path = path2, Comment = Title });
+            }
+            if (path3.Length > 0)
+            {
+                Photos.Add(new Photo() { Path = path3, Comment = Title });
+            }
+            return Photos;
+        }
+
         //main icon https://cdn2.iconfinder.com/data/icons/money-finance/512/auction-hammer-512.png
         //add bet https://cdn0.iconfinder.com/data/icons/auction-and-competition-filled-outline-1/64/offer-offering-hand-give-bid-bidding-auction-512.png
         //sold https://cdn0.iconfinder.com/data/icons/auction-and-competition-filled-outline-1/64/sold-sign-label-tag-512.png
@@ -64,6 +113,6 @@ namespace Auction.Code
         //pay https://cdn0.iconfinder.com/data/icons/auction-and-competition-filled-outline-1/64/payment-credit_card-card-visa-512.png
         //add lot https://cdn0.iconfinder.com/data/icons/auction-and-competition-filled-outline-1/64/new_items-sign-tag-new-512.png
         //user management https://cdn0.iconfinder.com/data/icons/auction-and-competition-filled-outline-1/64/auctioneer-auction-hitting-512.png
-        
+
     }
 }

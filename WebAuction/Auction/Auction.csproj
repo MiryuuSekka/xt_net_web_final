@@ -125,11 +125,11 @@
     <Content Include="Pages\Autorisation\NewUser.cshtml" />
     <Content Include="Pages\_LayoutClear.cshtml" />
     <Content Include="Pages\User\List.cshtml" />
-    <Content Include="Pages\Product\Add.cshtml" />
     <Content Include="Pages\Bet\Add.cshtml" />
     <Content Include="Pages\User\Edit.cshtml" />
     <Content Include="Pages\Lot\AddTag.cshtml" />
     <Content Include="Pages\_LayoutIndex.cshtml" />
+    <Content Include="Pages\Lot\addLogic.cshtml" />
     <None Include="Scripts\jquery-3.0.0-vsdoc.js" />
     <Content Include="Scripts\jquery-3.0.0.js" />
     <Content Include="Scripts\jquery-3.0.0.min.js" />
@@ -227,7 +227,7 @@
     <Content Include="Pages\_Layout.cshtml" />
     <Content Include="Pages\Index.cshtml" />
     <Content Include="Pages\Lot\View.cshtml" />
-    <Content Include="Pages\Lot\Add.cshtml" />
+    <Content Include="Pages\Lot\_AddLot.cshtml" />
     <Content Include="Pages\Lot\Edit.cshtml" />
     <Content Include="Scripts\jquery-3.0.0.slim.min.map" />
     <Content Include="Scripts\jquery-3.0.0.min.map" />

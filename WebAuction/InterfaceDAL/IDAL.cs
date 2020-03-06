@@ -6,7 +6,7 @@ namespace InterfaceDAL
     public interface IDAL
     {
         #region Lot
-        int AddLot(Lot NewData);
+        int AddLot(Lot NewData, List<Tag> Tags);
         IEnumerable<Lot> GetLots();
         Lot GetLotById(int Id);
         IEnumerable<Lot> GetLotByTag(string Tag);
@@ -15,7 +15,6 @@ namespace InterfaceDAL
         #endregion
 
         #region Product
-        int AddProduct(Product NewData);
         IEnumerable<Product> GetProducts();
         Product GetProductById(int Id);
         void DeleteProduct(int Id);
@@ -39,5 +38,6 @@ namespace InterfaceDAL
 
         IEnumerable<Tag> GetProductTags(int LogId);
         IEnumerable<Bet> GetAllLotsBet(int LotId);
+        IEnumerable<Tag> GetTags();
     }
 }

@@ -21,6 +21,25 @@ namespace SQLBase.DB
         }
 
         #region add
+        public int AddLot(Lot data, List<Tag>Tags)
+        {
+            for (int i = 0; i < data.Product.Photos.Count; i++)
+            {
+                data.Product.Photos[i].Id = AddData(data.Product.Photos[i]);
+            }
+            data.Product.Id = AddData(data.Product);
+            foreach (var item in data.Product.Photos)
+            {
+                AddConnectPhotoToProduct(item.Id, data.Product.Id);
+            }
+            data.Id = AddData(data);
+            foreach (var item in Tags)
+            {
+                AddConnectTagToLot(item.Id, data.Id);
+            }
+
+            return data.Id;
+        }
         public int AddData(User data)
         {
             sqlExpression = "AddUser";
@@ -57,7 +76,8 @@ namespace SQLBase.DB
                 return result;
             }
         }
-        public int AddData(Lot data)
+
+        private int AddData(Lot data)
         {
             sqlExpression = "AddLot";
 
@@ -77,7 +97,7 @@ namespace SQLBase.DB
                 return result;
             }
         }
-        public int AddData(Photo data)
+        private int AddData(Photo data)
         {
             sqlExpression = "AddPhoto";
 
@@ -94,7 +114,7 @@ namespace SQLBase.DB
                 return result;
             }
         }
-        public int AddData(Product data)
+        private int AddData(Product data)
         {
             sqlExpression = "AddProduct";
 
@@ -112,6 +132,7 @@ namespace SQLBase.DB
                 return result;
             }
         }
+
         public int AddTag(string title)
         {
             sqlExpression = "AddTag";
@@ -546,6 +567,35 @@ namespace SQLBase.DB
                 }
             }
             return result;
+        }
+
+        public IEnumerable<Tag> GetTags()
+        {
+            var Tags = new List<Tag>();
+
+            sqlExpression = "GetTags";
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                connection.Open();
+                var command = new SqlCommand(sqlExpression, connection);
+                command.CommandType = CommandType.StoredProcedure;
+
+                var reader = command.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        Tags.Add(new Tag()
+                        {
+                            Id = (int)reader[0],
+                            Title = reader[1].ToString()
+                        });
+                    }
+                }
+                reader.Close();
+            }
+            return Tags;
         }
         #endregion
     }

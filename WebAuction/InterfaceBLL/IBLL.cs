@@ -5,6 +5,7 @@ namespace InterfaceBLL
 {
     public interface IBLL
     {
+        int AddLot(Lot NewData, List<Tag> Tags);
         int AddBet(Bet NewData);
         int AddUser(User NewData);
 
@@ -22,6 +23,8 @@ namespace InterfaceBLL
         IEnumerable<Bet> GetAllLotsBet(int LotId);
 
         decimal GetMaxPriceOfLot(int LotId);
+
+        IEnumerable<Tag> GetTags();
 
         /*
         #region Lot
