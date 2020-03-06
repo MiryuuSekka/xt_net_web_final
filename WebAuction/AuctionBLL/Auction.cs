@@ -40,6 +40,10 @@ namespace AuctionBLL
                     Dal.DeleteUser(Id);
                 }
             }
+            public void DeleteLot(int LotId)
+            {
+                Dal.DeleteLot(LotId);
+            }
 
             #endregion
 

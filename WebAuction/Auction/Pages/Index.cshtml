@@ -4,7 +4,7 @@
     Layout = "~/Pages/_Layout.cshtml";
 
     var code = new Logic();
-    var Lots = code.Code.GetLots();
+    var Lots = code.Code.GetLots().OrderBy(x=>x.DateEnd);
     var tag = Request["tag"];
     var tags = new List<Entity.Classes.Tag>();
 }
@@ -86,8 +86,8 @@
                                                 (Logic.CurrentUser.Role.Equals(Common.Role.Seller) &&
                                                 Logic.CurrentUser.Id.Equals(item.Seller.Id)))
                                             {
-                                                <button class="btn btn-sm btn-outline-info">Edit</button>
-                                                <button class="btn btn-sm btn-outline-danger">Close</button>
+                                                <button class="btn btn-sm btn-outline-info" value="@item.Id">Edit</button>
+                                                <button class="btn btn-sm btn-outline-danger" onclick="DeleteLot(@item.Id)">Close</button>
                                             }
                                         </div>
                                     </div>

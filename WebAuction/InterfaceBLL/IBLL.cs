@@ -9,6 +9,7 @@ namespace InterfaceBLL
         int AddBet(Bet NewData);
         int AddUser(User NewData);
 
+        void DeleteLot(int LotId);
         void DeleteUser(int Id);
         
         void ChangeUser(User NewData);

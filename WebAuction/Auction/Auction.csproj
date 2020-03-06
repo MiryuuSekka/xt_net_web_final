@@ -130,6 +130,7 @@
     <Content Include="Pages\Lot\AddTag.cshtml" />
     <Content Include="Pages\_LayoutIndex.cshtml" />
     <Content Include="Pages\Lot\addLogic.cshtml" />
+    <Content Include="Pages\Lot\DeleteLot.cshtml" />
     <None Include="Scripts\jquery-3.0.0-vsdoc.js" />
     <Content Include="Scripts\jquery-3.0.0.js" />
     <Content Include="Scripts\jquery-3.0.0.min.js" />

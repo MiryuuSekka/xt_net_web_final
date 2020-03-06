@@ -203,9 +203,9 @@ namespace SQLBase.DB
         }
         public void DeleteLot(int id)
         {
-            Delete("LotTable", "id_lot", id);
-            Delete("LotTags", "id_lot", id);
             Delete("BetTable", "id_lot", id);
+            Delete("LotTags", "id_lot", id);
+            Delete("LotTable", "id_lot", id);
         }
         public void DeletePhoto(int id)
         {
