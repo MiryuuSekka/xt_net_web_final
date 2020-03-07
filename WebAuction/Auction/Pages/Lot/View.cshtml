@@ -2,7 +2,7 @@
 @using Entity;
 @using Entity.Classes;
 @{
-    Layout = "~/Pages/_Layout.cshtml";
+    Layout = "~/Pages/Navigation/_Layout.cshtml";
 
     var Bets = new List<Bet>();
     var tags = new List<Tag>();
@@ -85,27 +85,6 @@
             {
                 <a href="~/Pages/Index.cshtml?tag=@item.Id" class="badge badge-info" style="margin:10px 5px;">@item.Title</a>
             }
-            @if (Lot.DateEnd > DateTime.Now && Logic.CurrentUser.Role.Equals(Common.Role.Admin) || Logic.CurrentUser.Id == Lot.Seller.Id)
-            {
-                if (addTag)
-                {
-                <form action="/" method="post"
-                      class="input-group input-group-sm mb-3 badge-warning btn-sm"
-                      style="border-radius:50px">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text badge-warning" id="inputGroup-sizing-sm">+</span>
-                    </div>
-                    <input type="text" class="form-control" aria-describedby="inputGroup-sizing-sm">
-                    <div class="input-group-append">
-                        <button class="btn btn-warning btn-sm" type="button">Add</button>
-                    </div>
-                </form>
-                }
-                else
-                {
-                    <a href="~/Pages/Lot/View.cshtml?id=@LotId&addTag=y" class="badge badge-warning" style="margin:10px 5px;">+</a>
-                }
-            }
         </div>
 
             <div class="container text-left">
@@ -163,7 +142,7 @@
 
             @if (Lot.DateEnd > DateTime.Now && Lot.DateStart < DateTime.Now)
             {
-                if (!Logic.CurrentUser.Role.Equals(Common.Role.Admin) && !Logic.CurrentUser.Role.Equals(Common.Role.Guest))
+                if (!Logic.CurrentUser.Role.Equals(Enums.Role.Admin) && !Logic.CurrentUser.Role.Equals(Enums.Role.Guest))
                 {
                     if (Logic.CurrentUser.Id != Lot.Seller.Id)
                     {

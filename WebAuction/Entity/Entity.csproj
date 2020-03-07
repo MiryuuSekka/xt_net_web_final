@@ -50,8 +50,9 @@
     <Compile Include="Classes\Product.cs" />
     <Compile Include="Classes\Tag.cs" />
     <Compile Include="Classes\User.cs" />
-    <Compile Include="Common.cs" />
+    <Compile Include="Enums.cs" />
     <Compile Include="Helper.cs" />
+    <Compile Include="Helpers1\GlobalExceptionHandler.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

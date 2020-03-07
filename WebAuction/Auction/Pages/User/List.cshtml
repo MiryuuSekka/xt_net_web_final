@@ -1,11 +1,11 @@
 ﻿@using Entity.Classes;
 @using Auction.Code;
 @{
-    Layout = "~/Pages/_LayoutClear.cshtml";
+    Layout = "~/Pages/Navigation/_Layout.cshtml";
 
     var code = new Logic();
     List<User> Users;
-    var Roles = Enum.GetValues(typeof(Entity.Common.Role)).Cast<Entity.Common.Role>();
+    var Roles = Enum.GetValues(typeof(Entity.Enums.Role)).Cast<Entity.Enums.Role>();
 }
 
 <!DOCTYPE html>
@@ -27,7 +27,7 @@
             </div>
             @foreach (var item in Users)
             {
-                if (item.Role != Entity.Common.Role.Guest && item.Id != Logic.CurrentUser.Id)
+                if (item.Role != Entity.Enums.Role.Guest && item.Id != Logic.CurrentUser.Id)
                 {
                     <form class="form badge btn-secondary my-1">
 
@@ -40,7 +40,7 @@
                             </label>
                             @foreach (var roleItem in Roles)
                             {
-                                if (roleItem != Entity.Common.Role.Guest)
+                                if (roleItem != Entity.Enums.Role.Guest)
                                 {
                                     if (item.Role == roleItem)
                                     {

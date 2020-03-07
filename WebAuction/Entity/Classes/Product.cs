@@ -8,6 +8,6 @@ namespace Entity.Classes
         public string Title { get; set; }
         public string Company { get; set; }
         public List<Photo> Photos { get; set; }
-        public Common.Status Status { get; set; }
+        public Enums.Status Status { get; set; }
     }
 }

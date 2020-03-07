@@ -1,0 +1,39 @@
+﻿@using Entity.Classes;
+@using Auction.Code;
+
+@{
+    Layout = null;
+
+    var code = new Logic();
+    var title = Request["title"];
+    var Tags = code.Code.GetTags().ToList();
+    var SelectedTags = new List<Tag>();
+
+    List<Photo> NewPhotos = code.ParsePhoto(title, Request["img 1"], Request["img 2"], Request["img 3"]).ToList();
+
+    Product NewProduct = code.ParseProduct(title, Request["company"], Request["status"]);
+    NewProduct.Photos = NewPhotos;
+
+    foreach (var item in Tags)
+    {
+        var name = "tag " + item.Id;
+        name = Request[name];
+        if (name != null)
+        {
+            int.TryParse(name, out int id);
+            var result = Tags.Where(x => x.Id == id).FirstOrDefault();
+            if (result != null)
+            {
+                SelectedTags.Add(result);
+            }
+        }
+    }
+
+    Lot NewLot = code.ParseLot(Request["start"], Request["end"], Request["price"]);
+    NewLot.Product = NewProduct;
+    NewLot.Seller = Logic.CurrentUser;
+
+    code.Code.AddLot(NewLot, SelectedTags);
+
+    Response.Redirect("~/Pages/Index.cshtml");
+}

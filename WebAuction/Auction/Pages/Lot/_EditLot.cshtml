@@ -20,17 +20,15 @@
 <body class="bg-dark">
     <section class="jumbotron" style="max-width:500px; margin:auto; padding:20px 30px;">
 
-        <form action="~/Pages/Lot/Logic/Add.cshtml" method="post">
+        <form action="~/Pages/Lot/Logic/Edit.cshtml" method="post">
+
             <div class="border-bottom border-secondary mb-3">
-
                 <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="Title" aria-label="Title" aria-describedby="Title1" name="title">
+                    <input type="text" class="form-control" placeholder="Title" name="title">
                 </div>
-
                 <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="Company" aria-label="Company" aria-describedby="Company2" name="company">
+                    <input type="text" class="form-control" placeholder="Company" name="company">
                 </div>
-
                 <div class="input-group mb-3">
                     <select class="custom-select" id="StatusSelect" name="status">
                         <option selected>Choose...</option>
@@ -40,7 +38,6 @@
                         }
                     </select>
                 </div>
-
             </div>
 
             <div class="border-bottom border-secondary mb-3">
@@ -88,7 +85,6 @@
             <div>
                 <button class="btn bg-success"> Add </button>
             </div>
-
         </form>
     </section>
 

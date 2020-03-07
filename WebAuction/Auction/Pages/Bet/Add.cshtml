@@ -12,11 +12,17 @@
     var code = new Logic();
     var lot = code.Code.GetLotById(Id);
 
-    code.Code.AddBet(new Bet() {
-        Date = DateTime.Now,
-        Customer = Logic.CurrentUser,
-        Lot = lot, Price = Price
-    });
+    var MaxPrice = code.Code.GetMaxPriceOfLot(Id);
 
+    if (MaxPrice < Price)
+    {
+        code.Code.AddBet(new Bet()
+        {
+            Date = DateTime.Now,
+            Customer = Logic.CurrentUser,
+            Lot = lot,
+            Price = Price
+        });
+    }
     Response.Redirect("~/Pages/Lot/View.cshtml?id="+id);
 }

@@ -350,7 +350,7 @@ namespace SQLBase.DB
                             Id = (int)reader[0],
                             Name = reader[1].ToString(),
                             Password = reader[2].ToString(),
-                            Role = (Common.Role)Enum.Parse(typeof(Common.Role), reader[3].ToString())
+                            Role = (Enums.Role)Enum.Parse(typeof(Enums.Role), reader[3].ToString())
                         };
                         result.Add(data);
                     }
@@ -379,7 +379,7 @@ namespace SQLBase.DB
                         UserInfo.Id = id;
                         UserInfo.Name = reader[0].ToString();
                         UserInfo.Password = reader[1].ToString();
-                        UserInfo.Role = (Common.Role)Enum.Parse(typeof(Common.Role), reader[2].ToString());
+                        UserInfo.Role = (Enums.Role)Enum.Parse(typeof(Enums.Role), reader[2].ToString());
                     }
                 }
                 reader.Close();
@@ -483,7 +483,7 @@ namespace SQLBase.DB
                             Title = reader[4].ToString(),
                             Company = reader[5].ToString(),
                             Id = (int)reader[6],
-                            Status = (Common.Status)Enum.Parse(typeof(Common.Status), reader[7].ToString())
+                            Status = (Enums.Status)Enum.Parse(typeof(Enums.Status), reader[7].ToString())
                         };
                     }
                 }
@@ -554,7 +554,7 @@ namespace SQLBase.DB
                                 Company = reader["company"].ToString(),
                                 Id = (int)reader["id"],
                                 Title = reader["ProductTitle"].ToString(),
-                                Status = (Common.Status)Enum.Parse(typeof(Common.Status), reader["StatusTitle"].ToString())
+                                Status = (Enums.Status)Enum.Parse(typeof(Enums.Status), reader["StatusTitle"].ToString())
                             };
                             result.Add(data);
                         }
@@ -596,6 +596,37 @@ namespace SQLBase.DB
                 reader.Close();
             }
             return Tags;
+        }
+        public IEnumerable<Bet> GetAllUserBets(int UserId)
+        {
+            var Bets = new List<Bet>();
+
+            sqlExpression = "GetUserBets";
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                connection.Open();
+                var command = new SqlCommand(sqlExpression, connection);
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.Add(new SqlParameter { ParameterName = "@id", Value = UserId });
+
+                var reader = command.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        Bets.Add(new Bet()
+                        {
+                            Id = (int)reader[0],
+                            Lot = new Lot() { Id = (int)reader[1] },
+                            Price = (decimal)reader[2],
+                            Date = (DateTime)reader[3]
+                        });
+                    }
+                }
+                reader.Close();
+            }
+            return Bets;
         }
         #endregion
     }

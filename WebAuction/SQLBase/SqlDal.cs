@@ -75,6 +75,11 @@ namespace SQLBase
         {
             return DataBase.GetAllLotsBet(LotId);
         }
+
+        public IEnumerable<Bet> GetAllUserBets(int UserId)
+        {
+            return DataBase.GetAllUserBets(UserId);
+        }
         #endregion
 
         #region get

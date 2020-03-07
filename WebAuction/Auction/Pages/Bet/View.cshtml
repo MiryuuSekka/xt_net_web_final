@@ -1,0 +1,83 @@
+﻿@using Entity.Classes;
+@using Auction.Code;
+@{
+    Layout = "~/Pages/Navigation/_Layout.cshtml";
+
+    var code = new Logic();
+    List<Bet> Bets = null;
+    var IsEnded = false;
+    var NotStarted = false;
+    var IsLastBet = false;
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <title></title>
+</head>
+<body class="bg-dark">
+    @if (Logic.CurrentUser.Role.ToString().Equals("Seller")|| Logic.CurrentUser.Role.ToString().Equals("Customer"))
+    {
+        Bets = code.Code.GetAllUserBets(Logic.CurrentUser.Id).ToList();
+        <div>
+            <div>
+                <h2 class="text-warning">Bets:</h2>
+            </div>
+            @foreach (var item in Bets)
+            {
+                item.Lot = code.Code.GetLotById(item.Lot.Id);
+                IsEnded = (item.Lot.DateEnd < DateTime.Now) && (item.Date <= item.Lot.DateEnd) && (item.Date >= item.Lot.DateStart);
+                NotStarted = item.Lot.DateStart > DateTime.Now;
+                var LastBetOnLot = code.Code.GetAllLotsBet(item.Lot.Id).LastOrDefault();
+                IsLastBet = LastBetOnLot.Id == item.Id;
+
+            <form class="form badge border-info table-bordered btn-outline-light my-1 p-3">
+
+                <h5>@item.Lot.Product.Title</h5>
+                <h6 class="text-success">@item.Price $</h6>
+                <h6>Bet added date: @item.Date.ToString("dd.MM.yyyy")</h6>
+
+
+                @if (IsLastBet && IsEnded)
+                {
+                    <button class="btn btn-sm btn-success" onclick="Pay(@item.Id)" style="width:100px">Pay</button>
+                }
+                @if (!IsEnded)
+                {
+                    <h6 class="text-warning">wait end of auction</h6>
+                    <h6 class="text-danger">End of auction at: @item.Lot.DateEnd.ToString("dd.MM.yyyy")</h6>
+                    if (IsLastBet)
+                    {
+                        <button class="btn btn-sm btn-danger" onclick="DeleteBet(@item.Id)" style="width:100px">Cancel</button>
+                    }
+                    else
+                    {
+                        <h6 class="text-secondary">u cant cancel this bet</h6>
+                    }
+                }
+            </form>
+            }
+        </div>
+    }
+    else
+    {
+        <section class="jumbotron text-center">
+            <div class="container">
+                <h1>Error</h1>
+                <p class="lead text-muted">
+                    u cant
+                </p>
+                <p>
+                    <a href="~/Pages/Index.cshtml" class="btn btn-info">Back</a>
+                </p>
+            </div>
+        </section>
+    }
+
+    <script src="~/Scripts/jquery-3.0.0.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Code/Action.js"></script>
+</body>
+</html>

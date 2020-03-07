@@ -5,7 +5,7 @@
     var code = new Logic();
     int.TryParse(Request["id"], out int id);
     var Role = Request["role"];
-    var roles = Enum.GetValues(typeof(Entity.Common.Role));
+    var roles = Enum.GetValues(typeof(Entity.Enums.Role));
     int role = 0;
     int count = 1;
     foreach (var item in roles)
@@ -26,7 +26,7 @@
     }
     else {
         var User = code.Code.GetUserById(id);
-        User.Role = (Entity.Common.Role)role;
+        User.Role = (Entity.Enums.Role)role;
         code.Code.ChangeUser(User);
     }
 

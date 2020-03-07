@@ -97,6 +97,7 @@
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Global.asax" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -123,14 +124,15 @@
     <Content Include="Pages\Autorisation\LogIn.cshtml" />
     <Content Include="Pages\Autorisation\LogOut.cshtml" />
     <Content Include="Pages\Autorisation\NewUser.cshtml" />
-    <Content Include="Pages\_LayoutClear.cshtml" />
     <Content Include="Pages\User\List.cshtml" />
     <Content Include="Pages\Bet\Add.cshtml" />
     <Content Include="Pages\User\Edit.cshtml" />
-    <Content Include="Pages\Lot\AddTag.cshtml" />
-    <Content Include="Pages\_LayoutIndex.cshtml" />
-    <Content Include="Pages\Lot\addLogic.cshtml" />
-    <Content Include="Pages\Lot\DeleteLot.cshtml" />
+    <Content Include="Pages\Lot\Logic\AddTag.cshtml" />
+    <Content Include="Pages\Lot\Logic\Add.cshtml" />
+    <Content Include="Pages\Lot\Logic\Delete.cshtml" />
+    <Content Include="Pages\Lot\Logic\Edit.cshtml" />
+    <Content Include="Pages\Bet\View.cshtml" />
+    <Content Include="Pages\Bet\Delete.cshtml" />
     <None Include="Scripts\jquery-3.0.0-vsdoc.js" />
     <Content Include="Scripts\jquery-3.0.0.js" />
     <Content Include="Scripts\jquery-3.0.0.min.js" />
@@ -221,15 +223,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Code\Logic.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <Content Include="Pages\_Layout.cshtml" />
+    <Content Include="Pages\Navigation\_Layout.cshtml" />
     <Content Include="Pages\Index.cshtml" />
     <Content Include="Pages\Lot\View.cshtml" />
     <Content Include="Pages\Lot\_AddLot.cshtml" />
-    <Content Include="Pages\Lot\Edit.cshtml" />
+    <Content Include="Pages\Lot\_EditLot.cshtml" />
     <Content Include="Scripts\jquery-3.0.0.slim.min.map" />
     <Content Include="Scripts\jquery-3.0.0.min.map" />
     <None Include="Web.Debug.config">

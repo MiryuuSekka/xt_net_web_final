@@ -39,5 +39,6 @@ namespace InterfaceDAL
         IEnumerable<Tag> GetProductTags(int LogId);
         IEnumerable<Bet> GetAllLotsBet(int LotId);
         IEnumerable<Tag> GetTags();
+        IEnumerable<Bet> GetAllUserBets(int UserId);
     }
 }

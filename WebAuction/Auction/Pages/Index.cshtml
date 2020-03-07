@@ -1,12 +1,20 @@
 ﻿@using Entity;
 @using Auction.Code;
 @{
-    Layout = "~/Pages/_Layout.cshtml";
+    Layout = "~/Pages/Navigation/_Layout.cshtml";
 
     var code = new Logic();
-    var Lots = code.Code.GetLots().OrderBy(x=>x.DateEnd);
     var tag = Request["tag"];
     var tags = new List<Entity.Classes.Tag>();
+    var Lots = code.Code.GetLots();
+
+    var UserId = Request["id"];
+    if (UserId!=null)
+    {
+        int.TryParse(UserId, out int id);
+        Lots = Lots.Where(x => x.Seller.Id == id);
+    }
+    Lots = Lots.OrderBy(x => x.DateEnd);
 }
 
 <!DOCTYPE html>
@@ -18,7 +26,7 @@
     <title></title>
 </head>
 <body class="bg-dark">
-    @if (Logic.CurrentUser.Role.Equals(Common.Role.Guest))
+    @if (Logic.CurrentUser.Role.Equals(Enums.Role.Guest))
     {
         <section class="jumbotron text-center">
             <div class="container">
@@ -38,10 +46,7 @@
                 <div class="row">
                     @foreach (var item in Lots)
                     {
-                        if (tag != null)
-                        {
-                            tags = code.Code.GetProductTags(item.Id).ToList();
-                        }
+                        tags = code.Code.GetProductTags(item.Id).ToList();
                         if (tag == null || tags.FirstOrDefault(x => x.Id.ToString() == tag) != null)
                         {
 
@@ -54,23 +59,14 @@
                                              alt="@item.Product.Photos[0].Comment"
                                              style="width:100%; height:100%;" />
                                     </svg>
-                                    <div class="card-body container" style="margin:auto">
+                                    <div class="card-body container btn-light" style="padding:0 2px;">
                                         <div>
                                             <div>
-                                                @if (item.DateEnd < DateTime.Now)
+                                                @foreach (var Itemtag in tags)
                                                 {
-                                                    <small class="text-danger">@Helper.GetCountdown(DateTime.Now, item.DateEnd)</small>
-                                                }
-                                                else
-                                                {
-                                                    if (item.DateStart > DateTime.Now)
-                                                    {
-                                                        <small class="text-info">@Helper.GetCountdown(DateTime.Now, item.DateStart) to open</small>
-                                                    }
-                                                    else
-                                                    {
-                                                        <small class="text-muted">@Helper.GetCountdown(DateTime.Now, item.DateEnd) to close</small>
-                                                    }
+                                                    <a href="~/Pages/Index.cshtml?tag=@Itemtag.Id" class="badge badge-secondary" style="margin:5px 1px;">
+                                                        @Itemtag.Title
+                                                    </a>
                                                 }
                                             </div>
                                             <div>
@@ -82,16 +78,33 @@
                                             <a class="btn btn-sm btn-outline-dark" href="~/Pages/Lot/View.cshtml?id=@item.Id">
                                                 View
                                             </a>
-                                            @if (Logic.CurrentUser.Role.Equals(Common.Role.Admin) ||
-                                                (Logic.CurrentUser.Role.Equals(Common.Role.Seller) &&
+                                            @if (Logic.CurrentUser.Role.Equals(Enums.Role.Admin) ||
+                                                (Logic.CurrentUser.Role.Equals(Enums.Role.Seller) &&
                                                 Logic.CurrentUser.Id.Equals(item.Seller.Id)))
                                             {
                                                 <button class="btn btn-sm btn-outline-info" value="@item.Id">Edit</button>
                                                 <button class="btn btn-sm btn-outline-danger" onclick="DeleteLot(@item.Id)">Close</button>
                                             }
                                         </div>
+                                        <div>
+                                            @if (item.DateEnd < DateTime.Now)
+                                            {
+                                                <small class="text-danger">@Helper.GetCountdown(DateTime.Now, item.DateEnd)</small>
+                                            }
+                                            else
+                                            {
+                                                if (item.DateStart > DateTime.Now)
+                                                {
+                                                    <small class="text-info">@Helper.GetCountdown(DateTime.Now, item.DateStart) to open</small>
+                                                }
+                                                else
+                                                {
+                                                    <small class="text-muted">@Helper.GetCountdown(DateTime.Now, item.DateEnd) to close</small>
+                                                }
+                                            }
+                                        </div>
                                     </div>
-                                </div>
+                                    </div>
                             </div>
                         }
                     }

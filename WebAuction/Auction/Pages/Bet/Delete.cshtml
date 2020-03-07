@@ -1,0 +1,13 @@
+﻿@using Entity.Classes;
+@using Auction.Code;
+
+@{
+    Layout = null;
+
+    var code = new Logic();
+    var LotId = Request["id"];
+    int.TryParse(LotId, out int id);
+    code.Code.DeleteBet(id);
+
+    Response.Redirect("~/Pages/Bet/View.cshtml");
+}

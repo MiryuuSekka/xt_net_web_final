@@ -11,7 +11,9 @@ namespace InterfaceBLL
 
         void DeleteLot(int LotId);
         void DeleteUser(int Id);
-        
+        void DeleteBet(int BetId);
+
+
         void ChangeUser(User NewData);
 
         Lot GetLotById(int Id);
@@ -26,34 +28,6 @@ namespace InterfaceBLL
         decimal GetMaxPriceOfLot(int LotId);
 
         IEnumerable<Tag> GetTags();
-
-        /*
-        #region Lot
-        int AddLot(Lot NewData);
-        IEnumerable<Lot> GetLots();
-        IEnumerable<Lot> GetLotByTag(string Tag);
-        void DeleteLot(int Id);
-        void ChangeLot(Lot NewData);
-        #endregion
-
-        #region Product
-        int AddProduct(Product NewData);
-        IEnumerable<Product> GetProducts();
-        Product GetProductById(int Id);
-        void DeleteProduct(int Id);
-        void ChangeProduct(Product NewData);
-        #endregion
-
-        #region Bet
-        IEnumerable<Bet> GetBets();
-        Bet GetBetById(int Id);
-        void DeleteBet(int Id);
-        #endregion
-
-        #region User
-        #endregion
-        */
-
-
+        IEnumerable<Bet> GetAllUserBets(int UserId);
     }
 }

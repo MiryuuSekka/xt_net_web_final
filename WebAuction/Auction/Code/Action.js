@@ -6,10 +6,7 @@ function ChangeUserRole(userId, NewRole) {
     location.href = '/Pages/User/Edit.cshtml?id=' + userId + '&role=' + NewRole;
 }
 
-function DeleteUser(userId) {
-    console.log(userId);
-    location.href = '/Pages/User/Edit.cshtml?id=' + userId+'&d=y';
-}
+
 
 $('#exampleModal').on('show.bs.modal', function (event) {
     var modal = $(this)
@@ -17,18 +14,51 @@ $('#exampleModal').on('show.bs.modal', function (event) {
     modal.find('.modal-body input').val();
 })
 
+function onAjaxSuccess() {
+    location.reload();
+}
+
 function DeleteLot(id) {
     $.post(
-        "/Pages/Lot/DeleteLot.cshtml",
+        "/Pages/Lot/Logic/Delete.cshtml",
         {
             id: id
         },
         onAjaxSuccess
     );
-
-    function onAjaxSuccess() {
-        location.reload(); 
-    }
 }
 
+function DeleteBet(id) {
+    $.post(
+        "/Pages/Bet/Delete.cshtml",
+        {
+            id: id
+        },
+        onAjaxSuccess
+    );
+}
+
+function DeleteUser(userId) {
+    $.post(
+        "/Pages/User/Edit.cshtml",
+        {
+            id: userId,
+            d: y
+        },
+        onAjaxSuccess
+    );
+}
+
+function Pay(id) {
+    alert("can't");
+}
+
+function ViewUserLots(UserId) {
+    $.post(
+        "/Pages/Index.cshtml",
+        {
+            id: UserId
+        },
+    );
+}
 

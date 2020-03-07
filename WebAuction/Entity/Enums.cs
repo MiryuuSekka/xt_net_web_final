@@ -1,6 +1,6 @@
 ﻿namespace Entity
 {
-    public class Common
+    public class Enums
     {
         public enum Role
         {
