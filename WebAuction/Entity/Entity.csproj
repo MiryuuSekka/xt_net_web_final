@@ -53,6 +53,7 @@
     <Compile Include="Enums.cs" />
     <Compile Include="Helper.cs" />
     <Compile Include="Helpers1\GlobalExceptionHandler.cs" />
+    <Compile Include="Helpers1\Logger.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -22,7 +22,7 @@ namespace SQLBase
 
         public int AddLot(Lot NewData, List<Tag> Tags)
         {
-           return DataBase.AddLot(NewData, Tags);
+            return DataBase.AddLot(NewData, Tags);
         }
 
         public int AddUser(User NewData)
@@ -36,11 +36,13 @@ namespace SQLBase
 
         public void ChangeLot(Lot NewData)
         {
+            Entity.Helpers1.Logger.Log.Error("Error ChangeLot");
             throw new NotImplementedException();
         }
 
         public void ChangeProduct(Product NewData)
         {
+            Entity.Helpers1.Logger.Log.Error("Error ChangeProduct");
             throw new NotImplementedException();
         }
 
@@ -85,11 +87,13 @@ namespace SQLBase
         #region get
         public Bet GetBetById(int Id)
         {
+            Entity.Helpers1.Logger.Log.Error("Error GetBetById");
             return null;
         }
 
         public IEnumerable<Bet> GetBets()
         {
+            Entity.Helpers1.Logger.Log.Error("Error GetBets");
             return null;
         }
 

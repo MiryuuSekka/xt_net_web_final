@@ -14,6 +14,7 @@ namespace Auction.Code
         public IBLL Code;
         public Logic()
         {
+            Entity.Helpers1.Logger.InitLogger();
             Code = AuctionResolver.GetBll();
         }
 

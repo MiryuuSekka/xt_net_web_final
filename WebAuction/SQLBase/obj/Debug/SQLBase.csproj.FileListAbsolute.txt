@@ -2,7 +2,6 @@ D:\EpamFinalTask\WebAuction\SQLBase\bin\Debug\SQLBase.dll
 D:\EpamFinalTask\WebAuction\SQLBase\bin\Debug\SQLBase.pdb
 D:\EpamFinalTask\WebAuction\SQLBase\bin\Debug\Entity.dll
 D:\EpamFinalTask\WebAuction\SQLBase\bin\Debug\InterfaceDAL.dll
-D:\EpamFinalTask\WebAuction\SQLBase\bin\Debug\log4net.dll
 D:\EpamFinalTask\WebAuction\SQLBase\bin\Debug\Entity.pdb
 D:\EpamFinalTask\WebAuction\SQLBase\bin\Debug\InterfaceDAL.pdb
 D:\EpamFinalTask\WebAuction\SQLBase\bin\Debug\log4net.xml

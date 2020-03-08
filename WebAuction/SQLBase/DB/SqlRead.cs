@@ -43,7 +43,7 @@ namespace SQLBase.DB
         public int AddData(User data)
         {
             sqlExpression = "AddUser";
-
+            int result = 0;
             using (var connection = new SqlConnection(ConnectionString))
             {
                 connection.Open();
@@ -53,14 +53,21 @@ namespace SQLBase.DB
                 command.Parameters.AddWithValue("@id_role", data.Role);
                 command.Parameters.AddWithValue("@name", data.Name).SqlDbType = SqlDbType.VarChar;
                 command.Parameters.AddWithValue("@pass", data.Password).SqlDbType = SqlDbType.VarChar;
-                int.TryParse(command.ExecuteScalar().ToString(),out int result);
+                try
+                {
+                    int.TryParse(command.ExecuteScalar().ToString(), out result);
+                }
+                catch (Exception e)
+                {
+                    Entity.Helpers1.Logger.Log.Error("Error - " + sqlExpression + e.Message);
+                }
                 return result;
             }
         }
         public int AddData(Bet data)
         {
             sqlExpression = "AddBet";
-
+            int result = 0;
             using (var connection = new SqlConnection(ConnectionString))
             {
                 connection.Open();
@@ -71,8 +78,14 @@ namespace SQLBase.DB
                 command.Parameters.Add(new SqlParameter { ParameterName = "@id_Lot", Value = data.Lot.Id });
                 command.Parameters.Add(new SqlParameter { ParameterName = "@price", Value = data.Price });
                 command.Parameters.Add(new SqlParameter { ParameterName = "@date", Value = data.Date});
-
-                int.TryParse(command.ExecuteScalar().ToString(), out int result);
+                try
+                {
+                    int.TryParse(command.ExecuteScalar().ToString(), out result);
+                }
+                catch (Exception e)
+                {
+                    Entity.Helpers1.Logger.Log.Error("Error - " + sqlExpression + e.Message);
+                }
                 return result;
             }
         }
@@ -80,7 +93,7 @@ namespace SQLBase.DB
         private int AddData(Lot data)
         {
             sqlExpression = "AddLot";
-
+            int result = 0;
             using (var connection = new SqlConnection(ConnectionString))
             {
                 connection.Open();
@@ -92,15 +105,21 @@ namespace SQLBase.DB
                 command.Parameters.Add(new SqlParameter { ParameterName = "@price", Value = data.Price });
                 command.Parameters.Add(new SqlParameter { ParameterName = "@dateStart", Value = data.DateStart });
                 command.Parameters.Add(new SqlParameter { ParameterName = "@dateEnd", Value = data.DateEnd });
-
-                int.TryParse(command.ExecuteScalar().ToString(), out int result);
+                try
+                {
+                    int.TryParse(command.ExecuteScalar().ToString(), out result);
+                }
+                catch (Exception e)
+                {
+                    Entity.Helpers1.Logger.Log.Error("Error - " + sqlExpression + e.Message);
+                }
                 return result;
             }
         }
         private int AddData(Photo data)
         {
             sqlExpression = "AddPhoto";
-
+            int result = 0;
             using (var connection = new SqlConnection(ConnectionString))
             {
                 connection.Open();
@@ -109,15 +128,21 @@ namespace SQLBase.DB
 
                 command.Parameters.Add(new SqlParameter { ParameterName = "@url", Value = data.Path });
                 command.Parameters.Add(new SqlParameter { ParameterName = "@comment", Value = data.Comment });
-
-                int.TryParse(command.ExecuteScalar().ToString(), out int result);
+                try
+                {
+                    int.TryParse(command.ExecuteScalar().ToString(), out result);
+                }
+                catch (Exception e)
+                {
+                    Entity.Helpers1.Logger.Log.Error("Error - " + sqlExpression + e.Message);
+                }
                 return result;
             }
         }
         private int AddData(Product data)
         {
             sqlExpression = "AddProduct";
-
+            int result = 0;
             using (var connection = new SqlConnection(ConnectionString))
             {
                 connection.Open();
@@ -127,8 +152,14 @@ namespace SQLBase.DB
                 command.Parameters.Add(new SqlParameter { ParameterName = "@id_status", Value = data.Status });
                 command.Parameters.Add(new SqlParameter { ParameterName = "@title", Value = data.Title });
                 command.Parameters.Add(new SqlParameter { ParameterName = "@company", Value = data.Company });
-
-                int.TryParse(command.ExecuteScalar().ToString(), out int result);
+                try
+                {
+                    int.TryParse(command.ExecuteScalar().ToString(), out result);
+                }
+                catch (Exception e)
+                {
+                    Entity.Helpers1.Logger.Log.Error("Error - " + sqlExpression + e.Message);
+                }
                 return result;
             }
         }
@@ -136,7 +167,7 @@ namespace SQLBase.DB
         public int AddTag(string title)
         {
             sqlExpression = "AddTag";
-
+            int result = 0;
             using (var connection = new SqlConnection(ConnectionString))
             {
                 connection.Open();
@@ -144,8 +175,14 @@ namespace SQLBase.DB
                 command.CommandType = CommandType.StoredProcedure;
 
                 command.Parameters.Add(new SqlParameter { ParameterName = "@title", Value = title });
-
-                int.TryParse(command.ExecuteScalar().ToString(), out int result);
+                try
+                {
+                    int.TryParse(command.ExecuteScalar().ToString(), out result);
+                }
+                catch (Exception e)
+                {
+                    Entity.Helpers1.Logger.Log.Error("Error - " + sqlExpression + e.Message);
+                }
                 return result;
             }
         }
@@ -153,7 +190,7 @@ namespace SQLBase.DB
         public int AddConnectPhotoToProduct(int Photo, int Product)
         {
             sqlExpression = "AddPhotoToProduct";
-
+            int result = 0;
             using (var connection = new SqlConnection(ConnectionString))
             {
                 connection.Open();
@@ -162,15 +199,21 @@ namespace SQLBase.DB
 
                 command.Parameters.Add(new SqlParameter { ParameterName = "@id_photo", Value = Photo });
                 command.Parameters.Add(new SqlParameter { ParameterName = "@id_product", Value = Product });
-
-                int.TryParse(command.ExecuteScalar().ToString(), out int result);
+                try
+                {
+                    int.TryParse(command.ExecuteScalar().ToString(), out result);
+                }
+                catch (Exception e)
+                {
+                    Entity.Helpers1.Logger.Log.Error("Error - " + sqlExpression + e.Message);
+                }
                 return result;
             }
         }
         public int AddConnectTagToLot(int Tag, int Lot)
         {
             sqlExpression = "AddTagToLot";
-
+            int result = 0;
             using (var connection = new SqlConnection(ConnectionString))
             {
                 connection.Open();
@@ -179,8 +222,14 @@ namespace SQLBase.DB
 
                 command.Parameters.Add(new SqlParameter { ParameterName = "@id_tag", Value = Tag });
                 command.Parameters.Add(new SqlParameter { ParameterName = "@id_lot", Value = Lot });
-
-                int.TryParse(command.ExecuteScalar().ToString(), out int result);
+                try
+                {
+                    int.TryParse(command.ExecuteScalar().ToString(), out result);
+                }
+                catch (Exception e)
+                {
+                    Entity.Helpers1.Logger.Log.Error("Error - " + sqlExpression + e.Message);
+                }
                 return result;
             }
         }
@@ -235,7 +284,14 @@ namespace SQLBase.DB
             {
                 SqlConnection.Open();
                 var command = new SqlCommand(SqlCommand, SqlConnection);
-                command.ExecuteNonQuery();
+                try
+                {
+                    command.ExecuteNonQuery();
+                }
+                catch (Exception e)
+                {
+                    Entity.Helpers1.Logger.Log.Error("Error - " + SqlCommand + e.Message);
+                }
             }
         }
         #endregion

@@ -59,7 +59,6 @@ D:\EpamFinalTask\WebAuction\Auction\bin\System.Web.Razor.dll
 D:\EpamFinalTask\WebAuction\Auction\bin\System.Web.WebPages.Deployment.dll
 D:\EpamFinalTask\WebAuction\Auction\bin\System.Web.WebPages.dll
 D:\EpamFinalTask\WebAuction\Auction\bin\System.Web.WebPages.Razor.dll
-D:\EpamFinalTask\WebAuction\Auction\bin\log4net.dll
 D:\EpamFinalTask\WebAuction\Auction\bin\AuctionBLL.dll
 D:\EpamFinalTask\WebAuction\Auction\bin\SQLBase.dll
 D:\EpamFinalTask\WebAuction\Auction\bin\Entity.pdb
@@ -87,3 +86,4 @@ D:\EpamFinalTask\WebAuction\Auction\obj\Debug\Auction.csproj.CoreCompileInputs.c
 D:\EpamFinalTask\WebAuction\Auction\obj\Debug\Auction.csproj.CopyComplete
 D:\EpamFinalTask\WebAuction\Auction\obj\Debug\Auction.dll
 D:\EpamFinalTask\WebAuction\Auction\obj\Debug\Auction.pdb
+D:\EpamFinalTask\WebAuction\Auction\bin\Web.Debug.config
