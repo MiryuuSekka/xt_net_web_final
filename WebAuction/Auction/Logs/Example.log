@@ -63,3 +63,6 @@
 2020-03-09 07:30:10,517  ERROR Error - DELETE FROM PhotoTable WHERE id_photo=66Конфликт инструкции DELETE с ограничением REFERENCE "FK_LotPhoto_Photo". Конфликт произошел в базе данных "test_shop", таблица "dbo.ProductPhoto", column 'id_photo'.
 Выполнение данной инструкции было прервано.
 2020-03-09 08:14:29,443  ERROR Error - DeleteTagLotConnectionСсылка на объект не указывает на экземпляр объекта.
+2020-03-09 20:36:36,012  ERROR Add lottoo short company name
+2020-03-09 20:36:59,376  ERROR Add lottoo short company name
+2020-03-09 20:37:40,712  ERROR Add lottoo short title

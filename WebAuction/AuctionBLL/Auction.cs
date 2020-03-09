@@ -1,7 +1,9 @@
 ﻿using Entity.Classes;
 using InterfaceDAL;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace AuctionBLL
 {
@@ -23,10 +25,40 @@ namespace AuctionBLL
             }
             public int AddUser(User NewData)
             {
+                Regex.Replace(NewData.Name, @"\s+", "");
+                Regex.Replace(NewData.Password, @"\s+", "");
+                if (NewData.Name.Length < 3)
+                {
+                    throw new ArgumentException("too short name");
+                }
+                if (NewData.Password.Length < 5)
+                {
+                    throw new ArgumentException("too short password");
+                }
                 return Dal.AddUser(NewData);
             }
             public int AddLot(Lot NewData, List<Tag> Tags)
             {
+                if (NewData.Product.Company.Length < 2)
+                {
+                    throw new ArgumentException("too short company name");
+                }
+                if (NewData.Product.Title.Length < 3)
+                {
+                    throw new ArgumentException("too short title");
+                }
+                if (NewData.Price < 0)
+                {
+                    throw new ArgumentException("price must be above 0");
+                }
+                if (NewData.DateStart > NewData.DateEnd)
+                {
+                    throw new ArgumentException("Start date must be before end date");
+                }
+                if (NewData.DateStart > DateTime.Now)
+                {
+                    throw new ArgumentException("auction can't be started before create");
+                }
                 return Dal.AddLot(NewData, Tags);
             }
             public void AddPhoto(Photo NewData, int ProductId)
@@ -66,6 +98,26 @@ namespace AuctionBLL
             }
             public void ChangeLot(Lot NewData)
             {
+                if (NewData.Product.Company.Length < 2)
+                {
+                    throw new ArgumentException("too short company name");
+                }
+                if (NewData.Product.Title.Length < 3)
+                {
+                    throw new ArgumentException("too short title");
+                }
+                if (NewData.Price < 0)
+                {
+                    throw new ArgumentException("price must be above 0");
+                }
+                if (NewData.DateStart > NewData.DateEnd)
+                {
+                    throw new ArgumentException("Start date must be before end date");
+                }
+                if (NewData.DateStart > DateTime.Now)
+                {
+                    throw new ArgumentException("auction can't be started before create");
+                }
                 Dal.ChangeLot(NewData);
             }
 

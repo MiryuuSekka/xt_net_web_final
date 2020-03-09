@@ -32,8 +32,14 @@
     Lot NewLot = code.ParseLot(Request["start"], Request["end"], Request["price"]);
     NewLot.Product = NewProduct;
     NewLot.Seller = Logic.CurrentUser;
-
-    code.Code.AddLot(NewLot, SelectedTags);
+    try
+    {
+        code.Code.AddLot(NewLot, SelectedTags);
+    }
+    catch (Exception e)
+    {
+        Entity.Helpers.Logger.Log.Error("Add lot" + e.Message);
+    }
 
     Response.Redirect("~/Pages/Index.cshtml");
 }

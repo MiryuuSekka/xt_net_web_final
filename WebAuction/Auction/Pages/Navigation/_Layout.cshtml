@@ -13,7 +13,7 @@
     <link href="~/Content/bootstrap.css" rel="stylesheet" />
     <title></title>
 </head>
-<body>
+<body style=" min-width:300px;">
 
 
     <nav class="navbar navbar-expand-sm d-flex justify-content-between"
@@ -31,7 +31,7 @@
             </a>
         }
 
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
+        <button class="navbar-toggler btn btn-outline-danger" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
                 aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -61,7 +61,7 @@
         <div class="form-inline my-2 my-lg-0">
             <div style="margin-right:25px" class="d-flex align-middle">
                 <img style="height:50px; width:auto;" src="@code.GetUserIcon(Logic.CurrentUser.Role)" alt="@Logic.CurrentUser.Role.ToString()" />
-                <h6 class="text-white">@Logic.CurrentUser.Name</h6>
+                <h6 class="text-white" style="margin-top:12px">@Logic.CurrentUser.Name</h6>
             </div>
             @if (Logic.CurrentUser.Role.ToString().Equals("Guest"))
             {

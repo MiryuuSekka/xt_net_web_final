@@ -23,7 +23,14 @@
             {
                 Lot.Product.Company = newCompany;
             }
-            code.Code.ChangeLot(Lot);
+            try
+            {
+                code.Code.ChangeLot(Lot);
+            }
+            catch (Exception e)
+            {
+                Entity.Helpers.Logger.Log.Error("change lot" + e.Message);
+            }
             break;
 
         case "photo":
@@ -45,7 +52,14 @@
                 decimal.TryParse(newPrice, out decimal price);
                 Lot.Price = price;
             }
-            code.Code.ChangeLot(Lot);
+            try
+            {
+                code.Code.ChangeLot(Lot);
+            }
+            catch (Exception e)
+            {
+                Entity.Helpers.Logger.Log.Error("Change lot" + e.Message);
+            }
             break;
 
         case "date":

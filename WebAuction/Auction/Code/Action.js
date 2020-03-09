@@ -84,7 +84,7 @@ function DeleteUser(userId) {
         "/Pages/User/Edit.cshtml",
         {
             id: userId,
-            d: y
+            d: "y"
         },
         onAjaxSuccess
     );

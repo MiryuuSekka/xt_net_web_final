@@ -59,7 +59,7 @@ namespace SQLBase.DB
                 }
                 catch (Exception e)
                 {
-                    Entity.Helpers1.Logger.Log.Error("Error - " + sqlExpression + e.Message);
+                    Entity.Helpers.Logger.Log.Error("Error - " + sqlExpression + e.Message);
                 }
                 return result;
             }
@@ -84,7 +84,7 @@ namespace SQLBase.DB
                 }
                 catch (Exception e)
                 {
-                    Entity.Helpers1.Logger.Log.Error("Error - " + sqlExpression + e.Message);
+                    Entity.Helpers.Logger.Log.Error("Error - " + sqlExpression + e.Message);
                 }
                 return result;
             }
@@ -111,7 +111,7 @@ namespace SQLBase.DB
                 }
                 catch (Exception e)
                 {
-                    Entity.Helpers1.Logger.Log.Error("Error - " + sqlExpression + e.Message);
+                    Entity.Helpers.Logger.Log.Error("Error - " + sqlExpression + e.Message);
                 }
                 return result;
             }
@@ -134,7 +134,7 @@ namespace SQLBase.DB
                 }
                 catch (Exception e)
                 {
-                    Entity.Helpers1.Logger.Log.Error("Error - " + sqlExpression + e.Message);
+                    Entity.Helpers.Logger.Log.Error("Error - " + sqlExpression + e.Message);
                 }
                 return result;
             }
@@ -158,7 +158,7 @@ namespace SQLBase.DB
                 }
                 catch (Exception e)
                 {
-                    Entity.Helpers1.Logger.Log.Error("Error - " + sqlExpression + e.Message);
+                    Entity.Helpers.Logger.Log.Error("Error - " + sqlExpression + e.Message);
                 }
                 return result;
             }
@@ -181,7 +181,7 @@ namespace SQLBase.DB
                 }
                 catch (Exception e)
                 {
-                    Entity.Helpers1.Logger.Log.Error("Error - " + sqlExpression + e.Message);
+                    Entity.Helpers.Logger.Log.Error("Error - " + sqlExpression + e.Message);
                 }
                 return result;
             }
@@ -205,7 +205,7 @@ namespace SQLBase.DB
                 }
                 catch (Exception e)
                 {
-                    Entity.Helpers1.Logger.Log.Error("Error - " + sqlExpression + e.Message);
+                    Entity.Helpers.Logger.Log.Error("Error - " + sqlExpression + e.Message);
                 }
                 return result;
             }
@@ -228,7 +228,7 @@ namespace SQLBase.DB
                 }
                 catch (Exception e)
                 {
-                    Entity.Helpers1.Logger.Log.Error("Error - " + sqlExpression + e.Message);
+                    Entity.Helpers.Logger.Log.Error("Error - " + sqlExpression + e.Message);
                 }
                 return result;
             }
@@ -295,7 +295,7 @@ namespace SQLBase.DB
                 }
                 catch (Exception e)
                 {
-                    Entity.Helpers1.Logger.Log.Error("Error - " + sqlExpression + e.Message);
+                    Entity.Helpers.Logger.Log.Error("Error - " + sqlExpression + e.Message);
                 }
                 return result;
             }
@@ -314,7 +314,7 @@ namespace SQLBase.DB
                 }
                 catch (Exception e)
                 {
-                    Entity.Helpers1.Logger.Log.Error("Error - " + SqlCommand + e.Message);
+                    Entity.Helpers.Logger.Log.Error("Error - " + SqlCommand + e.Message);
                 }
             }
         }

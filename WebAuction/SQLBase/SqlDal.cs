@@ -64,7 +64,7 @@ namespace SQLBase
             }
             catch (Exception e)
             {
-                Entity.Helpers1.Logger.Log.Error("Error ChangeLot "+e.Message);
+                Entity.Helpers.Logger.Log.Error("Error ChangeLot "+e.Message);
             }
         }
         

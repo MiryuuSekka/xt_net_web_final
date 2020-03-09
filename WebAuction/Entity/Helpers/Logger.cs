@@ -1,7 +1,7 @@
 ﻿using log4net;
 using log4net.Config;
 
-namespace Entity.Helpers1
+namespace Entity.Helpers
 {
     public static class Logger
     {
