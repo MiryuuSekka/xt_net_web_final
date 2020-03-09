@@ -14,6 +14,37 @@ $('#exampleModal').on('show.bs.modal', function (event) {
     modal.find('.modal-body input').val();
 })
 
+$('#EditTitleModal').on('show.bs.modal', function (event) {
+    var modal = $(this)
+    modal.find('.modal-title').text('Edit lot.Title')
+    modal.find('.modal-body input').val();
+})
+$('#EditPhotoModal').on('show.bs.modal', function (event) {
+    var modal = $(this)
+    modal.find('.modal-title').text('Edit lot.Photo')
+    modal.find('.modal-body input').val();
+})
+$('#EditTagModal').on('show.bs.modal', function (event) {
+    var modal = $(this)
+    modal.find('.modal-title').text('Edit lot.Tag')
+    modal.find('.modal-body input').val();
+})
+$('#EditDateModal').on('show.bs.modal', function (event) {
+    var modal = $(this)
+    modal.find('.modal-title').text('Edit lot.Date')
+    modal.find('.modal-body input').val();
+})
+$('#EditPriceModal').on('show.bs.modal', function (event) {
+    var modal = $(this)
+    modal.find('.modal-title').text('Edit lot.Price')
+    modal.find('.modal-body input').val();
+})
+$('#EditStatusModal').on('show.bs.modal', function (event) {
+    var modal = $(this)
+    modal.find('.modal-title').text('Edit lot.Status')
+    modal.find('.modal-body input').val();
+})
+
 function onAjaxSuccess() {
     location.reload();
 }
@@ -31,6 +62,16 @@ function DeleteLot(id) {
 function DeleteBet(id) {
     $.post(
         "/Pages/Bet/Delete.cshtml",
+        {
+            id: id
+        },
+        onAjaxSuccess
+    );
+}
+
+function DeleteImage(id) {
+    $.post(
+        "/Pages/Photo/Delete.cshtml",
         {
             id: id
         },

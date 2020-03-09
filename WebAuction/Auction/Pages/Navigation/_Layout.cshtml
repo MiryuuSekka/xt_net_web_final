@@ -21,20 +21,20 @@
 
         <a class="navbar-brand font-weight-bold" href="~/Pages/Index.cshtml">
             <img src="/docs/4.0/assets/brand/bootstrap-solid.svg" width="30" height="30" class="d-inline-block align-top" alt=""
-                 style="background-size:50px; width: 50px; height: 50px; 
+                 style="background-size:50px; width: 50px; height: 50px;
                     background-image: url('https://cdn0.iconfinder.com/data/icons/market-and-economics-1-2/128/11-512.png');">
         </a>
-            @if (Logic.CurrentUser.Role.ToString().Equals("Admin"))
-            {
-                <a href="~/Pages/User/List.cshtml" class="btn btn-sm btn-warning float-left">
-                    Users
-                </a>
-            }
+        @if (Logic.CurrentUser.Role.ToString().Equals("Admin"))
+        {
+            <a href="~/Pages/User/List.cshtml" class="btn btn-sm btn-warning float-left">
+                Users
+            </a>
+        }
 
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" 
-                    aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
         <div class="collapse navbar-collapse" id="navbarNav">
 
             @if (Logic.CurrentUser.Role.ToString().Equals("Seller"))

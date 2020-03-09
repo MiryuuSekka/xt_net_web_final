@@ -23,6 +23,7 @@
     }
 
     var addTag = Request["addTag"]=="y";
+    bool CanEdit = (!Logic.CurrentUser.Role.Equals(Enums.Role.Admin) && !Logic.CurrentUser.Role.Equals(Enums.Role.Guest)) && (Logic.CurrentUser.Id == Lot.Seller.Id);
 }
 
 <!DOCTYPE html>
@@ -36,63 +37,82 @@
 <body class="bg-dark">
     @if (Lot != null)
     {
-    <section class="jumbotron text-center" style="max-width:500px; margin:auto; padding:20px 30px;">
-        <div style="padding:20px 30px;">
-            <h5>@Lot.Product.Title.ToString()</h5>
-            <h6>by @Lot.Product.Company.ToString()</h6>
-        </div>
+        <section class="jumbotron text-center" style="max-width:500px; margin:auto; padding:20px 30px;">
+            <div style="padding:20px 30px;">
+                <h5>@Lot.Product.Title.ToString()</h5>
+                <h6>by @Lot.Product.Company.ToString()</h6>
+                @if (CanEdit)
+                {
+                    <button class="badge btn btn-warning" data-toggle="modal" data-target="#EditTitleModal"> Edit </button>
+                }
 
-        <div class="container">
-            <div id="carouselExampleControls" class="carousel slide text-center" data-ride="carousel">
-                <ol class="carousel-indicators">
-                    <li data-target="#carouselButton" data-slide-to="0" onclick="SlideCarousel('0')" class="active"></li>
-                    @if (Lot.Product.Photos.Count() > 1)
-                    {
-                        for (int i = 1; i < Lot.Product.Photos.Count; i++)
+            </div>
+
+            <div class="container">
+                <div id="carouselExampleControls" class="carousel slide text-center" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                        <li data-target="#carouselButton" data-slide-to="0" onclick="SlideCarousel('0')" class="active"></li>
+                        @if (Lot.Product.Photos.Count() > 1)
                         {
-                            <li data-target="#carouselButton" data-slide-to="@i" onclick="SlideCarousel('@i')"></li>
-                        }
-                    }
-                </ol>
-                <div class="carousel-inner">
-                    <div class="carousel-item active" style="max-height:300px; max-width:500px;">
-                        <img class="d-block w-100"
-                             style="max-height:300px; max-width:500px; width:auto; height:auto; object-fit: contain;"
-                             src="@Lot.Product.Photos[0].Path"
-                             alt="@Lot.Product.Photos[0].Comment">
-                    </div>
-                    @if (Lot.Product.Photos.Count() > 1)
-                    {
-                        foreach (var item in Lot.Product.Photos)
-                        {
-                            if (item.Id != Lot.Product.Photos[0].Id)
+                            for (int i = 1; i < Lot.Product.Photos.Count; i++)
                             {
-                                <div class="carousel-item">
-                                    <img class="d-block w-100"
-                                         style="max-height:300px; max-width:500px; width:auto; height:auto; object-fit: contain;"
-                                         src="@item.Path"
-                                         alt="@item.Comment">
-                                </div>
+                                <li data-target="#carouselButton" data-slide-to="@i" onclick="SlideCarousel('@i')"></li>
                             }
                         }
-                    }
+                    </ol>
+                    <div class="carousel-inner">
+                        <div class="carousel-item active" style="max-height:300px; max-width:500px;">
+                            <img class="d-block w-100"
+                                 style="max-height:300px; max-width:500px; width:auto; height:auto; object-fit: contain;"
+                                 src="@Lot.Product.Photos[0].Path"
+                                 alt="@Lot.Product.Photos[0].Comment">
+                        </div>
+                        @if (Lot.Product.Photos.Count() > 1)
+                        {
+                            foreach (var item in Lot.Product.Photos)
+                            {
+                                if (item.Id != Lot.Product.Photos[0].Id)
+                                {
+                                    <div class="carousel-item">
+                                        <img class="d-block w-100"
+                                             style="max-height:300px; max-width:500px; width:auto; height:auto; object-fit: contain;"
+                                             src="@item.Path"
+                                             alt="@item.Comment">
+                                    </div>
+                                }
+                            }
+                        }
+                    </div>
                 </div>
+                @if (CanEdit)
+                {
+                    <button class="badge btn btn-warning" data-toggle="modal" data-target="#EditPhotoModal"> Edit </button>
+                }
             </div>
-        </div>
 
-        <div class="container flex-row form-inline border-secondary border-bottom">
-            @foreach (var item in tags)
-            {
-                <a href="~/Pages/Index.cshtml?tag=@item.Id" class="badge badge-info" style="margin:10px 5px;">@item.Title</a>
-            }
-        </div>
+            <div class="container flex-row form-inline border-secondary border-bottom">
+                @foreach (var item in tags)
+                {
+                    <a href="~/Pages/Index.cshtml?tag=@item.Id" class="badge badge-info" style="margin:10px 5px;">@item.Title</a>
+                }
+                @if (CanEdit)
+                {
+                    <button class="badge btn btn-warning" data-toggle="modal" data-target="#EditTagModal"> Edit </button>
+                }
+            </div>
 
             <div class="container text-left">
                 <div class="border-dark">
                     <div class="flex-row form-inline">
                         <h6>Status:</h6>
                         <h6 class="text-dark" style="margin-left:10px">@Lot.Product.Status.ToString()</h6>
+
+                        @if (CanEdit)
+                        {
+                            <button class="badge btn btn-warning" data-toggle="modal" data-target="#EditStatusModal"> Edit </button>
+                        }
                     </div>
+
                     @if (Lot.DateEnd < DateTime.Now)
                     {
                         <div class="flex-row form-inline">
@@ -107,6 +127,10 @@
                             <div class="flex-row form-inline">
                                 <h6>Auction will open: </h6>
                                 <h6 class="text-info" style="margin-left:10px">@Lot.DateStart.ToString("dd.MM.yyyy")</h6>
+                                @if (CanEdit)
+                                {
+                                    <button class="badge btn btn-warning" data-toggle="modal" data-target="#EditDateModal"> Edit </button>
+                                }
                             </div>
                         }
                         else
@@ -124,6 +148,10 @@
                     <div class="flex-row form-inline">
                         <h6>Last price:</h6>
                         <h6 style="margin-left:10px">@Lot.Price $</h6>
+                        @if (CanEdit && Lot.DateStart > DateTime.Now)
+                        {
+                            <button class="badge btn btn-warning" data-toggle="modal" data-target="#EditPriceModal"> Edit </button>
+                        }
                     </div>
                 </div>
             </div>
@@ -139,7 +167,6 @@
                     }
                 </div>
             }
-
             @if (Lot.DateEnd > DateTime.Now && Lot.DateStart < DateTime.Now)
             {
                 if (!Logic.CurrentUser.Role.Equals(Enums.Role.Admin) && !Logic.CurrentUser.Role.Equals(Enums.Role.Guest))
@@ -181,6 +208,102 @@
             </div>
         </section>
     }
+
+    <div class="modal fade" id="EditTitleModal" tabindex="-1" role="dialog" aria-labelledby="EditTitleModal" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="EditTitleModalLabel">Edit lot.Title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    @RenderPage("~/Pages/Lot/_EditTitle.cshtml", Lot.Id)
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="EditTagModal" tabindex="-1" role="dialog" aria-labelledby="EditTagModal" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="EditTagModalLabel">Edit lot.Tag</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    @RenderPage("~/Pages/Lot/_EditTag.cshtml", Lot.Id)
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="EditDateModal" tabindex="-1" role="dialog" aria-labelledby="EditDateModal" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="EditDateModalLabel">Edit lot.Date</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    @RenderPage("~/Pages/Lot/_EditDate.cshtml", Lot.Id)
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="EditPhotoModal" tabindex="-1" role="dialog" aria-labelledby="EditPhotoModal" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="EditPhotoModalLabel">Edit lot.Photo</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    @RenderPage("~/Pages/Lot/_EditPhoto.cshtml", Lot.Id)
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="EditPriceModal" tabindex="-1" role="dialog" aria-labelledby="EditPriceModal" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="EditPriceModalLabel">Edit lot.Price</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    @RenderPage("~/Pages/Lot/_EditPrice.cshtml", Lot.Id)
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="EditStatusModal" tabindex="-1" role="dialog" aria-labelledby="EditStatusModal" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="EditStatusModalLabel">Edit lot.Status</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    @RenderPage("~/Pages/Lot/_EditStatus.cshtml", Lot.Id)
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script src="~/Scripts/jquery-3.0.0.js"></script>
     <script src="~/Scripts/bootstrap.js"></script>

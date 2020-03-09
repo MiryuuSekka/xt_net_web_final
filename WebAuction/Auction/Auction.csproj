@@ -134,6 +134,13 @@
     <Content Include="Pages\Lot\Logic\Edit.cshtml" />
     <Content Include="Pages\Bet\View.cshtml" />
     <Content Include="Pages\Bet\Delete.cshtml" />
+    <Content Include="Pages\Photo\Delete.cshtml" />
+    <Content Include="Pages\Lot\_EditTitle.cshtml" />
+    <Content Include="Pages\Lot\_EditTag.cshtml" />
+    <Content Include="Pages\Lot\_EditPhoto.cshtml" />
+    <Content Include="Pages\Lot\_EditPrice.cshtml" />
+    <Content Include="Pages\Lot\_EditStatus.cshtml" />
+    <Content Include="Pages\Lot\_EditDate.cshtml" />
     <None Include="Scripts\jquery-3.0.0-vsdoc.js" />
     <Content Include="Scripts\jquery-3.0.0.js" />
     <Content Include="Scripts\jquery-3.0.0.min.js" />

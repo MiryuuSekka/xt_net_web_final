@@ -116,7 +116,7 @@ namespace SQLBase.DB
                 return result;
             }
         }
-        private int AddData(Photo data)
+        public int AddData(Photo data)
         {
             sqlExpression = "AddPhoto";
             int result = 0;
@@ -277,6 +277,30 @@ namespace SQLBase.DB
             Delete("LotTags", "id_tag", id);
         }
 
+        public int DeleteConnectTagToLot(int Tag, int Lot)
+        {
+            sqlExpression = "DeleteTagLotConnection";
+            int result = 0;
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                connection.Open();
+                var command = new SqlCommand(sqlExpression, connection);
+                command.CommandType = CommandType.StoredProcedure;
+
+                command.Parameters.Add(new SqlParameter { ParameterName = "@id_tag", Value = Tag });
+                command.Parameters.Add(new SqlParameter { ParameterName = "@id_lot", Value = Lot });
+                try
+                {
+                    int.TryParse(command.ExecuteScalar().ToString(), out result);
+                }
+                catch (Exception e)
+                {
+                    Entity.Helpers1.Logger.Log.Error("Error - " + sqlExpression + e.Message);
+                }
+                return result;
+            }
+        }
+
         private void Delete(string TableName, string ColumnName, int Id)
         {
             var SqlCommand = $"DELETE FROM {TableName} WHERE {ColumnName}={Id}";
@@ -309,6 +333,38 @@ namespace SQLBase.DB
                 command.Parameters.Add(new SqlParameter { ParameterName = "@role", Value = Edited.Role });
                 command.Parameters.Add(new SqlParameter { ParameterName = "@pass", Value = Edited.Password });
                 command.Parameters.Add(new SqlParameter { ParameterName = "@name", Value = Edited.Name });
+
+                var reader = command.ExecuteReader();
+            }
+        }
+        public void Edit(Lot Edited)
+        {
+            sqlExpression = "EditLot";
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                connection.Open();
+                var command = new SqlCommand(sqlExpression, connection);
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.Add(new SqlParameter { ParameterName = "@id", Value = Edited.Id });
+                command.Parameters.Add(new SqlParameter { ParameterName = "@price", Value = Edited.Price });
+                command.Parameters.Add(new SqlParameter { ParameterName = "@start", Value = Edited.DateStart });
+                command.Parameters.Add(new SqlParameter { ParameterName = "@end", Value = Edited.DateEnd });
+
+                var reader = command.ExecuteReader();
+            }
+        }
+        public void Edit(Product Edited)
+        {
+            sqlExpression = "EditProduct";
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                connection.Open();
+                var command = new SqlCommand(sqlExpression, connection);
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.Add(new SqlParameter { ParameterName = "@id", Value = Edited.Id });
+                command.Parameters.Add(new SqlParameter { ParameterName = "@company", Value = Edited.Company });
+                command.Parameters.Add(new SqlParameter { ParameterName = "@title", Value = Edited.Title });
+                command.Parameters.Add(new SqlParameter { ParameterName = "@status", Value = Edited.Status });
 
                 var reader = command.ExecuteReader();
             }
@@ -547,7 +603,7 @@ namespace SQLBase.DB
             }
             return LotInfo;
         }
-        private IEnumerable<Photo>GetAllProductPhotoById(int ProductId)
+        public IEnumerable<Photo>GetAllProductPhotoById(int ProductId)
         {
             var Photos = new List<Photo>();
 

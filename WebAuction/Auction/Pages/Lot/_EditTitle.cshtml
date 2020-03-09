@@ -1,0 +1,48 @@
+﻿@using Entity;
+@using Entity.Classes;
+@using Auction.Code;
+@{
+    Layout = null;
+
+    var code = new Logic();
+    var value = Request["id"];
+    int.TryParse(value, out int id);
+    var Lot = code.Code.GetLotById(id);
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <title></title>
+</head>
+<body class="bg-dark">
+    <section class="jumbotron" style="max-width:500px; margin:auto; padding:20px 30px;">
+
+        <form action="~/Pages/Lot/Logic/Edit.cshtml" method="post">
+            <input type="text" name="EditType" value="title" hidden />
+            <input type="text" name="id" value="@value" hidden />
+
+            <div class="border-bottom border-secondary mb-3">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Title" name="title" value="@Lot.Product.Title">
+                </div>
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Company" name="company" value="@Lot.Product.Company">
+                </div>
+
+                <div>
+                    <button class="btn bg-success"> Save </button>
+                </div>
+            </div>
+        </form>
+
+    </section>
+
+    <script src="~/Scripts/jquery-3.0.0.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Code/Action.js"></script>
+</body>
+</html>

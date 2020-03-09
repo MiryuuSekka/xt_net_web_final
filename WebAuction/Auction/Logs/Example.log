@@ -1,1 +1,65 @@
-2020-03-08 05:12:46,647  ERROR Error - AddLotПереполнение SqlDateTime. Должно находиться в пределах от 1/1/1753 12:00:00 AM и 12/31/9999 11:59:59 PM.
+2020-03-09 04:20:37,714  ERROR Error - DELETE FROM PhotoTable WHERE id_photo=19Конфликт инструкции DELETE с ограничением REFERENCE "FK_LotPhoto_Photo". Конфликт произошел в базе данных "test_shop", таблица "dbo.ProductPhoto", column 'id_photo'.
+Выполнение данной инструкции было прервано.
+2020-03-09 07:06:35,677  ERROR Error - DELETE FROM PhotoTable WHERE id_photo=37Конфликт инструкции DELETE с ограничением REFERENCE "FK_LotPhoto_Photo". Конфликт произошел в базе данных "test_shop", таблица "dbo.ProductPhoto", column 'id_photo'.
+Выполнение данной инструкции было прервано.
+2020-03-09 07:06:47,727  ERROR Error - DELETE FROM PhotoTable WHERE id_photo=38Конфликт инструкции DELETE с ограничением REFERENCE "FK_LotPhoto_Photo". Конфликт произошел в базе данных "test_shop", таблица "dbo.ProductPhoto", column 'id_photo'.
+Выполнение данной инструкции было прервано.
+2020-03-09 07:06:58,830  ERROR Error - DELETE FROM PhotoTable WHERE id_photo=15Конфликт инструкции DELETE с ограничением REFERENCE "FK_LotPhoto_Photo". Конфликт произошел в базе данных "test_shop", таблица "dbo.ProductPhoto", column 'id_photo'.
+Выполнение данной инструкции было прервано.
+2020-03-09 07:06:58,852  ERROR Error - DELETE FROM PhotoTable WHERE id_photo=16Конфликт инструкции DELETE с ограничением REFERENCE "FK_LotPhoto_Photo". Конфликт произошел в базе данных "test_shop", таблица "dbo.ProductPhoto", column 'id_photo'.
+Выполнение данной инструкции было прервано.
+2020-03-09 07:06:58,863  ERROR Error - DELETE FROM PhotoTable WHERE id_photo=17Конфликт инструкции DELETE с ограничением REFERENCE "FK_LotPhoto_Photo". Конфликт произошел в базе данных "test_shop", таблица "dbo.ProductPhoto", column 'id_photo'.
+Выполнение данной инструкции было прервано.
+2020-03-09 07:07:14,459  ERROR Error - DELETE FROM PhotoTable WHERE id_photo=40Конфликт инструкции DELETE с ограничением REFERENCE "FK_LotPhoto_Photo". Конфликт произошел в базе данных "test_shop", таблица "dbo.ProductPhoto", column 'id_photo'.
+Выполнение данной инструкции было прервано.
+2020-03-09 07:07:14,494  ERROR Error - DELETE FROM PhotoTable WHERE id_photo=41Конфликт инструкции DELETE с ограничением REFERENCE "FK_LotPhoto_Photo". Конфликт произошел в базе данных "test_shop", таблица "dbo.ProductPhoto", column 'id_photo'.
+Выполнение данной инструкции было прервано.
+2020-03-09 07:07:14,505  ERROR Error - DELETE FROM PhotoTable WHERE id_photo=42Конфликт инструкции DELETE с ограничением REFERENCE "FK_LotPhoto_Photo". Конфликт произошел в базе данных "test_shop", таблица "dbo.ProductPhoto", column 'id_photo'.
+Выполнение данной инструкции было прервано.
+2020-03-09 07:08:05,496  ERROR Error - DELETE FROM PhotoTable WHERE id_photo=45Конфликт инструкции DELETE с ограничением REFERENCE "FK_LotPhoto_Photo". Конфликт произошел в базе данных "test_shop", таблица "dbo.ProductPhoto", column 'id_photo'.
+Выполнение данной инструкции было прервано.
+2020-03-09 07:09:04,022  ERROR Error - DELETE FROM PhotoTable WHERE id_photo=47Конфликт инструкции DELETE с ограничением REFERENCE "FK_LotPhoto_Photo". Конфликт произошел в базе данных "test_shop", таблица "dbo.ProductPhoto", column 'id_photo'.
+Выполнение данной инструкции было прервано.
+2020-03-09 07:09:07,314  ERROR Error - DELETE FROM PhotoTable WHERE id_photo=48Конфликт инструкции DELETE с ограничением REFERENCE "FK_LotPhoto_Photo". Конфликт произошел в базе данных "test_shop", таблица "dbo.ProductPhoto", column 'id_photo'.
+Выполнение данной инструкции было прервано.
+2020-03-09 07:10:24,780  ERROR Error - DELETE FROM PhotoTable WHERE id_photo=50Конфликт инструкции DELETE с ограничением REFERENCE "FK_LotPhoto_Photo". Конфликт произошел в базе данных "test_shop", таблица "dbo.ProductPhoto", column 'id_photo'.
+Выполнение данной инструкции было прервано.
+2020-03-09 07:10:27,477  ERROR Error - DELETE FROM PhotoTable WHERE id_photo=51Конфликт инструкции DELETE с ограничением REFERENCE "FK_LotPhoto_Photo". Конфликт произошел в базе данных "test_shop", таблица "dbo.ProductPhoto", column 'id_photo'.
+Выполнение данной инструкции было прервано.
+2020-03-09 07:10:30,200  ERROR Error - DELETE FROM PhotoTable WHERE id_photo=49Конфликт инструкции DELETE с ограничением REFERENCE "FK_LotPhoto_Photo". Конфликт произошел в базе данных "test_shop", таблица "dbo.ProductPhoto", column 'id_photo'.
+Выполнение данной инструкции было прервано.
+2020-03-09 07:16:46,345  ERROR Error - DELETE FROM PhotoTable WHERE id_photo=1Конфликт инструкции DELETE с ограничением REFERENCE "FK_LotPhoto_Photo". Конфликт произошел в базе данных "test_shop", таблица "dbo.ProductPhoto", column 'id_photo'.
+Выполнение данной инструкции было прервано.
+2020-03-09 07:16:46,357  ERROR Error - DELETE FROM PhotoTable WHERE id_photo=2Конфликт инструкции DELETE с ограничением REFERENCE "FK_LotPhoto_Photo". Конфликт произошел в базе данных "test_shop", таблица "dbo.ProductPhoto", column 'id_photo'.
+Выполнение данной инструкции было прервано.
+2020-03-09 07:17:09,125  ERROR Error - DELETE FROM PhotoTable WHERE id_photo=53Конфликт инструкции DELETE с ограничением REFERENCE "FK_LotPhoto_Photo". Конфликт произошел в базе данных "test_shop", таблица "dbo.ProductPhoto", column 'id_photo'.
+Выполнение данной инструкции было прервано.
+2020-03-09 07:17:09,517  ERROR Error - DELETE FROM PhotoTable WHERE id_photo=54Конфликт инструкции DELETE с ограничением REFERENCE "FK_LotPhoto_Photo". Конфликт произошел в базе данных "test_shop", таблица "dbo.ProductPhoto", column 'id_photo'.
+Выполнение данной инструкции было прервано.
+2020-03-09 07:17:54,190  ERROR Error - DELETE FROM PhotoTable WHERE id_photo=55Конфликт инструкции DELETE с ограничением REFERENCE "FK_LotPhoto_Photo". Конфликт произошел в базе данных "test_shop", таблица "dbo.ProductPhoto", column 'id_photo'.
+Выполнение данной инструкции было прервано.
+2020-03-09 07:17:54,564  ERROR Error - DELETE FROM PhotoTable WHERE id_photo=56Конфликт инструкции DELETE с ограничением REFERENCE "FK_LotPhoto_Photo". Конфликт произошел в базе данных "test_shop", таблица "dbo.ProductPhoto", column 'id_photo'.
+Выполнение данной инструкции было прервано.
+2020-03-09 07:18:00,859  ERROR Error - DELETE FROM PhotoTable WHERE id_photo=57Конфликт инструкции DELETE с ограничением REFERENCE "FK_LotPhoto_Photo". Конфликт произошел в базе данных "test_shop", таблица "dbo.ProductPhoto", column 'id_photo'.
+Выполнение данной инструкции было прервано.
+2020-03-09 07:18:00,881  ERROR Error - DELETE FROM PhotoTable WHERE id_photo=58Конфликт инструкции DELETE с ограничением REFERENCE "FK_LotPhoto_Photo". Конфликт произошел в базе данных "test_shop", таблица "dbo.ProductPhoto", column 'id_photo'.
+Выполнение данной инструкции было прервано.
+2020-03-09 07:21:11,754  ERROR Error - DELETE FROM PhotoTable WHERE id_photo=39Конфликт инструкции DELETE с ограничением REFERENCE "FK_LotPhoto_Photo". Конфликт произошел в базе данных "test_shop", таблица "dbo.ProductPhoto", column 'id_photo'.
+Выполнение данной инструкции было прервано.
+2020-03-09 07:23:46,934  ERROR Error - DELETE FROM PhotoTable WHERE id_photo=61Конфликт инструкции DELETE с ограничением REFERENCE "FK_LotPhoto_Photo". Конфликт произошел в базе данных "test_shop", таблица "dbo.ProductPhoto", column 'id_photo'.
+Выполнение данной инструкции было прервано.
+2020-03-09 07:23:47,401  ERROR Error ChangeLot Конфликт инструкции UPDATE с ограничением FOREIGN KEY "FK_product_statuses". Конфликт произошел в базе данных "test_shop", таблица "dbo.StatusTable", column 'id_status'.
+Выполнение данной инструкции было прервано.
+2020-03-09 07:24:24,082  ERROR Error - DELETE FROM PhotoTable WHERE id_photo=62Конфликт инструкции DELETE с ограничением REFERENCE "FK_LotPhoto_Photo". Конфликт произошел в базе данных "test_shop", таблица "dbo.ProductPhoto", column 'id_photo'.
+Выполнение данной инструкции было прервано.
+2020-03-09 07:24:35,737  ERROR Error ChangeLot Конфликт инструкции UPDATE с ограничением FOREIGN KEY "FK_product_statuses". Конфликт произошел в базе данных "test_shop", таблица "dbo.StatusTable", column 'id_status'.
+Выполнение данной инструкции было прервано.
+2020-03-09 07:27:43,372  ERROR Error - DELETE FROM PhotoTable WHERE id_photo=63Конфликт инструкции DELETE с ограничением REFERENCE "FK_LotPhoto_Photo". Конфликт произошел в базе данных "test_shop", таблица "dbo.ProductPhoto", column 'id_photo'.
+Выполнение данной инструкции было прервано.
+2020-03-09 07:27:55,618  ERROR Error - DELETE FROM PhotoTable WHERE id_photo=64Конфликт инструкции DELETE с ограничением REFERENCE "FK_LotPhoto_Photo". Конфликт произошел в базе данных "test_shop", таблица "dbo.ProductPhoto", column 'id_photo'.
+Выполнение данной инструкции было прервано.
+2020-03-09 07:30:07,671  ERROR Error - DELETE FROM PhotoTable WHERE id_photo=65Конфликт инструкции DELETE с ограничением REFERENCE "FK_LotPhoto_Photo". Конфликт произошел в базе данных "test_shop", таблица "dbo.ProductPhoto", column 'id_photo'.
+Выполнение данной инструкции было прервано.
+2020-03-09 07:30:10,517  ERROR Error - DELETE FROM PhotoTable WHERE id_photo=66Конфликт инструкции DELETE с ограничением REFERENCE "FK_LotPhoto_Photo". Конфликт произошел в базе данных "test_shop", таблица "dbo.ProductPhoto", column 'id_photo'.
+Выполнение данной инструкции было прервано.
+2020-03-09 08:14:29,443  ERROR Error - DeleteTagLotConnectionСсылка на объект не указывает на экземпляр объекта.

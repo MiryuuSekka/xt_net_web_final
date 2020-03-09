@@ -5,35 +5,100 @@
     Layout = null;
 
     var code = new Logic();
-    var title = Request["title"];
-    var Tags = code.Code.GetTags().ToList();
-    var SelectedTags = new List<Tag>();
+    var EditType = Request["EditType"];
+    var LotId = Request["id"];
+    int.TryParse(LotId, out int id);
+    var Lot = code.Code.GetLotById(id);
 
-    List<Photo> NewPhotos = code.ParsePhoto(title, Request["img 1"], Request["img 2"], Request["img 3"]).ToList();
-
-    Product NewProduct = code.ParseProduct(title, Request["company"], Request["status"]);
-    NewProduct.Photos = NewPhotos;
-
-    foreach (var item in Tags)
+    switch (EditType)
     {
-        var name = "tag " + item.Id;
-        name = Request[name];
-        if (name != null)
-        {
-            int.TryParse(name, out int id);
-            var result = Tags.Where(x => x.Id == id).FirstOrDefault();
-            if (result != null)
+        case "title":
+            var newTitle = Request["title"];
+            var newCompany = Request["company"];
+            if (newTitle != null)
             {
-                SelectedTags.Add(result);
+                Lot.Product.Title = newTitle;
             }
-        }
+            if (newCompany != null)
+            {
+                Lot.Product.Company = newCompany;
+            }
+            code.Code.ChangeLot(Lot);
+            break;
+
+        case "photo":
+            var images = new List<string>() { Request["img1"], Request["img2"], Request["img3"] };
+            foreach (var item in images)
+            {
+                if (item.Length > 1)
+                {
+                    var Photo = new Photo() { Comment = Lot.Product.Title, Path = item };
+                    code.Code.AddPhoto(Photo, Lot.Product.Id);
+                }
+            }
+            break;
+
+        case "price":
+            var newPrice = Request["price"];
+            if (newPrice!=null)
+            {
+                decimal.TryParse(newPrice, out decimal price);
+                Lot.Price = price;
+            }
+            code.Code.ChangeLot(Lot);
+            break;
+
+        case "date":
+            var start = Request["start"];
+            var end = Request["end"];
+            if (start!=null)
+            {
+                DateTime.TryParse(start, out DateTime startdate);
+                Lot.DateStart = startdate;
+            }
+            if (end != null)
+            {
+                DateTime.TryParse(end, out DateTime enddate);
+                Lot.DateEnd = enddate;
+            }
+            if ((Lot.DateStart < Lot.DateEnd) && (Lot.DateStart > DateTime.Now))
+            {
+                code.Code.ChangeLot(Lot);
+            }
+            break;
+
+        case "status":
+            code.Code.ChangeLot(Lot);
+            var status = Request["status"];
+            if (status != null)
+            {
+                int.TryParse(status, out int INTstatus);
+                Lot.Product.Status = (Entity.Enums.Status)INTstatus;
+            }
+            code.Code.ChangeLot(Lot);
+            break;
+
+        case "tag":
+            var Tags = code.Code.GetTags().ToList();
+            var SelectedTags = new List<Tag>();
+            foreach (var item in Tags)
+            {
+                var name = Request["tag " + item.Id];
+                if (name != null)
+                {
+                    int.TryParse(name, out int Tagid);
+                    var result = Tags.Where(x => x.Id == Tagid).FirstOrDefault();
+                    if (result != null)
+                    {
+                        SelectedTags.Add(result);
+                    }
+                }
+            }
+            code.Code.ChangeLotTags(Lot.Id, SelectedTags);
+            break;
+
+        default:
+            break;
     }
-
-    Lot NewLot = code.ParseLot(Request["start"], Request["end"], Request["price"]);
-    NewLot.Product = NewProduct;
-    NewLot.Seller = Logic.CurrentUser;
-
-    code.Code.AddLot(NewLot, SelectedTags);
-
     Response.Redirect("~/Pages/Index.cshtml");
 }

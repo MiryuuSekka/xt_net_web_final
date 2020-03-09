@@ -29,6 +29,10 @@ namespace AuctionBLL
             {
                 return Dal.AddLot(NewData, Tags);
             }
+            public void AddPhoto(Photo NewData, int ProductId)
+            {
+                Dal.AddPhoto(NewData, ProductId);
+            }
             #endregion
 
             #region delete            
@@ -48,6 +52,10 @@ namespace AuctionBLL
             {
                 Dal.DeleteBet(BetId);
             }
+            public void DeletePhoto(int Id)
+            {
+                Dal.DeletePhoto(Id);
+            }
 
             #endregion
 
@@ -55,6 +63,10 @@ namespace AuctionBLL
             public void ChangeUser(User NewData)
             {
                 Dal.ChangeUser(NewData);
+            }
+            public void ChangeLot(Lot NewData)
+            {
+                Dal.ChangeLot(NewData);
             }
 
             #endregion
@@ -89,6 +101,10 @@ namespace AuctionBLL
             {
                 return Dal.GetUsers();
             }
+            public IEnumerable<Tag> GetTags()
+            {
+                return Dal.GetTags();
+            }
 
             public IEnumerable<Tag> GetProductTags(int LogId)
             {
@@ -98,14 +114,14 @@ namespace AuctionBLL
             {
                 return Dal.GetAllLotsBet(LotId);
             }
-            public IEnumerable<Tag> GetTags()
-            {
-                return Dal.GetTags();
-            }
-
             public IEnumerable<Bet> GetAllUserBets(int UserId)
             {
                 return Dal.GetAllUserBets(UserId);
+            }
+
+            public void ChangeLotTags(int LotId, List<Tag> SelectedTags)
+            {
+                Dal.ChangeLotTags(LotId, SelectedTags);
             }
             #endregion
         }

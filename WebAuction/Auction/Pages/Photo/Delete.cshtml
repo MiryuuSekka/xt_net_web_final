@@ -1,0 +1,11 @@
+﻿@using Entity.Classes;
+@using Auction.Code;
+
+@{
+    Layout = null;
+
+    var code = new Logic();
+    var PhotoId = Request["id"];
+    int.TryParse(PhotoId, out int id);
+    code.Code.DeletePhoto(id);
+}

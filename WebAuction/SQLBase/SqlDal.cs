@@ -2,6 +2,7 @@
 using SQLBase.DB;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace SQLBase
 {
@@ -29,23 +30,44 @@ namespace SQLBase
         {
             return DataBase.AddData(NewData);
         }
+
+        public void AddPhoto(Photo newData, int ProductId)
+        {
+            var id = DataBase.AddData(newData);
+            DataBase.AddConnectPhotoToProduct(id, ProductId);
+        }
         #endregion
 
-
         #region change
-
         public void ChangeLot(Lot NewData)
         {
-            Entity.Helpers1.Logger.Log.Error("Error ChangeLot");
-            throw new NotImplementedException();
+            try
+            {
+                DataBase.Edit(NewData.Product);
+                DataBase.Edit(NewData);
+                var photos = DataBase.GetAllProductPhotoById(NewData.Product.Id);
+                foreach (var item in NewData.Product.Photos)
+                {
+                    if (!photos.ToList().Contains(item))
+                    {
+                        var id = DataBase.AddData(item);
+                        DataBase.AddConnectPhotoToProduct(id, NewData.Product.Id);
+                    }
+                }
+                foreach (var item in photos)
+                {
+                    if (!NewData.Product.Photos.Contains(item))
+                    {
+                        DataBase.DeletePhoto(item.Id);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Entity.Helpers1.Logger.Log.Error("Error ChangeLot "+e.Message);
+            }
         }
-
-        public void ChangeProduct(Product NewData)
-        {
-            Entity.Helpers1.Logger.Log.Error("Error ChangeProduct");
-            throw new NotImplementedException();
-        }
-
+        
         public void ChangeUser(User NewData)
         {
             DataBase.Edit(NewData);
@@ -73,6 +95,31 @@ namespace SQLBase
             DataBase.DeleteUser(Id);
         }
 
+        public void DeletePhoto(int Id)
+        {
+            DataBase.DeletePhoto(Id);
+        }
+
+        #endregion
+
+        #region get
+        public User GetUserById(int Id)
+        {
+            return DataBase.GetUserById(Id);
+        }
+
+        public Lot GetLotById(int Id)
+        {
+            return DataBase.GetLotById(Id);
+        }
+
+        public Product GetProductById(int Id)
+        {
+            return DataBase.GetProductById();
+        }
+
+
+
         public IEnumerable<Bet> GetAllLotsBet(int LotId)
         {
             return DataBase.GetAllLotsBet(LotId);
@@ -81,45 +128,6 @@ namespace SQLBase
         public IEnumerable<Bet> GetAllUserBets(int UserId)
         {
             return DataBase.GetAllUserBets(UserId);
-        }
-        #endregion
-
-        #region get
-        public Bet GetBetById(int Id)
-        {
-            Entity.Helpers1.Logger.Log.Error("Error GetBetById");
-            return null;
-        }
-
-        public IEnumerable<Bet> GetBets()
-        {
-            Entity.Helpers1.Logger.Log.Error("Error GetBets");
-            return null;
-        }
-
-        public Lot GetLotById(int Id)
-        {
-            return DataBase.GetLotById(Id);
-        }
-
-        public IEnumerable<Lot> GetLotByTag(string Tag)
-        {
-            return null;
-        }
-
-        public IEnumerable<Lot> GetLots()
-        {
-            return DataBase.GetAllShortLotInfo();
-        }
-
-        public Product GetProductById(int Id)
-        {
-            return DataBase.GetProductById();
-        }
-
-        public IEnumerable<Product> GetProducts()
-        {
-            return DataBase.GetAllProduct();
         }
 
         public IEnumerable<Tag> GetProductTags(int LogId)
@@ -132,15 +140,41 @@ namespace SQLBase
             return DataBase.GetTags();
         }
 
-        public User GetUserById(int Id)
-        {
-            return DataBase.GetUserById(Id);
-        }
-
         public IEnumerable<User> GetUsers()
         {
             return DataBase.GetAllUser();
         }
+
+        public IEnumerable<Lot> GetLots()
+        {
+            return DataBase.GetAllShortLotInfo();
+        }
+
+        public IEnumerable<Product> GetProducts()
+        {
+            return DataBase.GetAllProduct();
+        }
+
+        public void ChangeLotTags(int LotId, List<Tag> SelectedTags)
+        {
+            var LotTags = DataBase.GetProductTags(LotId);
+            var Tags = DataBase.GetTags();
+            foreach (var item in Tags)
+            {
+                var NowChecked = SelectedTags.Where(x => x.Id == item.Id).FirstOrDefault() != null;
+                var WasChecked = LotTags.Where(x => x.Id == item.Id).FirstOrDefault() != null;
+                
+                if (!NowChecked && WasChecked)
+                {
+                    DataBase.DeleteConnectTagToLot(item.Id, LotId);
+                }
+                if (NowChecked && !WasChecked)
+                {
+                    DataBase.AddConnectTagToLot(item.Id, LotId);
+                }
+            }
+        }
+
         #endregion
     }
 }

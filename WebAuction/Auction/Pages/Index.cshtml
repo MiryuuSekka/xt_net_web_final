@@ -82,7 +82,6 @@
                                                 (Logic.CurrentUser.Role.Equals(Enums.Role.Seller) &&
                                                 Logic.CurrentUser.Id.Equals(item.Seller.Id)))
                                             {
-                                                <button class="btn btn-sm btn-outline-info" value="@item.Id">Edit</button>
                                                 <button class="btn btn-sm btn-outline-danger" onclick="DeleteLot(@item.Id)">Close</button>
                                             }
                                         </div>
